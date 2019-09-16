@@ -10,7 +10,7 @@ from os.path import dirname, abspath
 import json
 
 SAMPLING_TOPIC = 'device_sampling'
-COMMANDS_TOPIC = 'model_commands'
+COMMANDS_TOPIC = 'model_commands_2'
 CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]
 PARENT_DIR = abspath(dirname(CURRENT_DIR))
 DATA_DIR = PARENT_DIR + '/data'
@@ -48,7 +48,7 @@ class PersistanceManager(threading.Thread):
                     # send model command to topic(model_commands)
                     b_device_id = bytes(device_id, 'ascii')
                     img_filename = filename + '.jpg'
-                    model_msg = json.dumps({'device_id': device_id, 'filename': img_filename})
+                    model_msg = json.dumps({'device_id': device_id, 'file_name': img_filename})
                     b_msg = bytes(model_msg, 'ascii')
                     self.send_model_json(b_device_id, b_msg)
         finally:
@@ -56,7 +56,7 @@ class PersistanceManager(threading.Thread):
 
 if __name__ == "__main__":
     pm = PersistanceManager()
-    pm.run()            
+    pm.start()            
 
 
 
