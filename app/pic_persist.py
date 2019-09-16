@@ -8,6 +8,7 @@ import threading
 import os
 from os.path import dirname, abspath
 import json
+import logging
 
 SAMPLING_TOPIC = 'device_sampling'
 COMMANDS_TOPIC = 'model_commands_2'
