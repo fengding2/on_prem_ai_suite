@@ -19,6 +19,8 @@ LOG_FILE_PATH = LOG_PATH + 'main.log'
 class CollectManager(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
+        if not os.path.exists(LOG_PATH):
+            os.makedirs(LOG_PATH)
         log_format = '%(asctime)s - %(levelname)s - %(message)s'
         formatter = logging.Formatter(log_format)
         logging.basicConfig(filename=LOG_FILE_PATH, format=log_format)

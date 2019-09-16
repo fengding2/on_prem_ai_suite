@@ -15,9 +15,20 @@ CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]
 PARENT_DIR = abspath(dirname(CURRENT_DIR))
 DATA_DIR = PARENT_DIR + '/data'
 
+LOG_PATH = CURRENT_DIR + '/log/'
+LOG_FILE_PATH = LOG_PATH + 'main.log
+
 class PersistanceManager(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
+        if not os.path.exists(LOG_PATH):
+            os.makedirs(LOG_PATH)
+        log_format = '%(asctime)s - %(levelname)s - %(message)s'
+        formatter = logging.Formatter(log_format)
+        logging.basicConfig(filename=LOG_FILE_PATH, format=log_format)
+        # create logger
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.DEBUG)
         self.kafka_producer = KafkaProducer(bootstrap_servers=['10.249.77.87:9092'], api_version=(0,10))
         self.kafka_consumer = KafkaConsumer(SAMPLING_TOPIC, bootstrap_servers= ['10.249.77.87:9092'], api_version=(0,10))
 
