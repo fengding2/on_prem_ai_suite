@@ -16,7 +16,7 @@ PARENT_DIR = abspath(dirname(CURRENT_DIR))
 DATA_DIR = PARENT_DIR + '/data'
 
 LOG_PATH = CURRENT_DIR + '/log/'
-LOG_FILE_PATH = LOG_PATH + 'main.log
+LOG_FILE_PATH = LOG_PATH + 'main.log'
 
 class PersistanceManager(threading.Thread):
     def __init__(self):
