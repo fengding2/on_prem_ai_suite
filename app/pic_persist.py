@@ -25,7 +25,7 @@ class PersistanceManager(threading.Thread):
         if not os.path.exists(LOG_PATH):
             os.makedirs(LOG_PATH)
         log_format = '%(asctime)s - %(levelname)s - %(message)s'
-        formatter = logging.Formatter(log_format)
+        # formatter = logging.Formatter(log_format)
         logging.basicConfig(filename=LOG_FILE_PATH, format=log_format)
         # create logger
         self.logger = logging.getLogger(__name__)
@@ -51,7 +51,6 @@ class PersistanceManager(threading.Thread):
     def run(self):
         try:
             for msg in self.kafka_consumer:
-                offset = msg.offset
                 b_key = msg.key
                 filename = b_key.decode('utf-8')
                 device_id, _ = filename.split('_')
