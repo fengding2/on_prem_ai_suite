@@ -47,7 +47,7 @@ ZK_DEVICE_INSTRUCTION_KEY = 'instruction'
 DASHBOARD_URL = "https://eventcollector.enigma.luoxinshe.cn"
 DASHBOARD_APPNAME = "appliedscience"
 DASHBOARD_PSWORD = "NzE0ODFBYzkwRDc5Q0VhQWM5MTVkN0Q5MTllQzMz"
-DASHBOARD_EVENTNAME = "engagement_event"
+DASHBOARD_EVENTNAME = "engagement-event"
 DASHBOARD_SCHEMA_PATH = CURRENT_DIR + "/activity_chn.avro"
 
 ##------- global utility functions ---------

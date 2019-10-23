@@ -36,7 +36,7 @@ class DashboardMsgHandler():
         print ('send async data')
         return await self.sender.send_event(json_data)
 
-    def register_schema(self, filename, eventname='engagemint_event'):
+    def register_schema(self, filename, eventname='engagemint-event'):
         print ('register schema loop')
         self._set_loop()
         asyncio.get_event_loop().run_until_complete(self._register_schema(filename, eventname))

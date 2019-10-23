@@ -1,122 +1,160 @@
 {
   "type" : "record",
   "name" : "MyClass",
+  "doc": "doc",
   "namespace" : "com.test.avro",
   "fields" : [ {
     "name" : "verb",
+    "doc": "doc",
     "type" : "string"
   }, {
     "name" : "actor",
+    "doc": "doc",
     "type" : {
       "type" : "record",
       "name" : "actor",
+      "doc": "doc",
       "fields" : [ {
         "name" : "mac",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "displayName",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "type",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "id",
+        "doc": "doc",
         "type" : "string"
       } ]
     }
   }, {
     "name" : "ec_event_time",
-    "type" : "long"
+    "doc": "doc",
+    "type" : {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+    }
   }, {
     "name" : "location",
+    "doc": "doc",
     "type" : {
       "type" : "record",
       "name" : "location",
+      "doc": "doc",
       "fields" : [ {
         "name" : "type",
-        "type" : "string"
+        "doc": "doc",
+        "type" : "string",
         "default": "Floor"
       }, {
         "name" : "id",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "cityName",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "buildingName",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "floorName",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "floor",
+        "doc": "doc",
         "type" : "long"
       }, {
         "name" : "timezone",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "longitude",
+        "doc": "doc",
         "type" : "double"
       }, {
         "name" : "latitude",
+        "doc": "doc",
         "type" : "long"
       } ]
     }
   }, {
     "name" : "result",
+    "doc": "doc",
     "type" : {
       "type" : "record",
       "name" : "result",
+      "doc": "doc",
       "fields" : [ {
         "name" : "count",
+        "doc": "doc",
         "type" : "long"
       }, {
         "name" : "positions",
+        "doc": "doc",
         "type" : {
           "type" : "array",
           "items" : {
             "type" : "record",
             "name" : "positions",
+            "doc": "doc",
             "fields" : [ {
               "name" : "h",
+              "doc": "doc",
               "type" : "long"
             }, {
               "name" : "x",
+              "doc": "doc",
               "type" : "long"
             }, {
               "name" : "w",
+              "doc": "doc",
               "type" : "long"
             }, {
               "name" : "y",
+              "doc": "doc",
               "type" : "long"
             } ]
           }
         }
       }, {
         "name" : "behaviors",
+        "doc": "doc",
         "type" : {
           "type" : "array",
           "items" : "string"
         }
       }, {
         "name" : "areas",
+        "doc": "doc",
         "type" : {
           "type" : "array",
           "items" : "string"
         }
       }, {
         "name" : "source",
+        "doc": "doc",
         "type" : "string"
       }, {
         "name" : "type",
+        "doc": "doc",
         "type" : "string"
       } ]
     }
   }, {
     "name" : "publish",
+    "doc": "doc",
     "type" : "string"
   }, {
     "name" : "ec_event_id",
+    "doc": "doc",
     "type" : "string"
   } ]
 }
