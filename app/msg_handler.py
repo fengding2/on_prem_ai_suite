@@ -46,3 +46,17 @@ class DashboardMsgHandler():
         ## TODO: WHY set loop
         self._set_loop()
         asyncio.get_event_loop().run_until_complete(self._send_data(json_data))
+
+
+if __name__ == "__main__":
+    from prediction_collector import dashboard_data
+    dashboard_sender = DashboardMsgHandler(appname=DASHBOARD_APPNAME, secret=DASHBOARD_PSWORD)
+    dashboard_sender.register_schema(DASHBOARD_SCHEMA_PATH, eventname=DASHBOARD_EVENTNAME)
+    i = 0
+    while True:
+        data = dashboard_data('test_device1', 'desc_test', 'a.jpg', [])
+        dashboard_sender.send_data(data)
+        time.sleep(1)
+        i = i + 1
+        if i > 10:
+            break

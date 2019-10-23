@@ -13,30 +13,29 @@ import uuid
 ## utility for constructing dashboard data
 def dashboard_data(device_id, desc, file_name, boxes):
     data = {}
-    data['actor'] = {"type": "Camera", "displayName": "Raspberry Pi", "id": device_id, "mac": device_id}
+    data["actor"] = {"type": "Camera", "displayName": "Raspberry Pi", "id": device_id, "mac": device_id}
     data["verb"] = "recognize"
     data["location"] =  {"id": "b12-asdf-afa", "type": "Floor"}   
-    data["publish"] = datetime.now().strftime("%m-%d-%y, %H:%M:%S")
-    data['description'] = 'action_recognition'
-    data['ec_event_time'] = int(time.time() * 1000)
+    data["publish"] = datetime.now().strftime("%Y-%M-%d, %H:%M:%S")
+    data["ec_event_time"] = int(time.time() * 1000)
     data["ec_event_id"] = str(uuid.uuid1())
-    data['result'] = {}
+    data["result"] = {}
     positions = []
     behaviors = []
     areas = []
     for box in boxes:
         behavior = ','.join(box['activities'])
-        position = {'x': box['loc'][0], 'y': box['loc'][1], 'w': box['loc'][2], 'h': box['loc'][3]}
-        area = AreaSlicer.get_area(device_id, position['x'], position['y'], position['w'], position['h'])
+        position = {"x": box['loc'][0], "y": box['loc'][1], "w": box['loc'][2], "h": box['loc'][3]}
+        area = AreaSlicer.get_area(device_id, position["x"], position["y"], position["w"], position["h"])
         positions.append(position)
         behaviors.append(behavior)
         areas.append(area)
-    data['result']['positions'] = positions
-    data['result']['behaviors'] = behaviors
-    data['result']['areas'] = areas
-    data['result']['source'] = file_name
-    data['result']['count'] = len(data['result']['positions'])
-    data['result']['type'] = 'Person'
+    data["result"]["positions"] = positions
+    data["result"]["behaviors"] = behaviors
+    data["result"]["areas"] = areas
+    data["result"]["source"] = file_name
+    data["result"]["count"] = len(data["result"]["positions"])
+    data["result"]["type"] = "Person"
     return data
 
 
