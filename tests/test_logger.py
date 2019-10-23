@@ -9,7 +9,7 @@ sys.path.append(dir_path)
 from tools.logger_utils import JsonFormatter, LoggerFactory
     
 
-DEFAULT_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+DEFAULT_FORMAT = '%(asctime)s - %(name)s - %(module)s - %(levelname)s - %(message)s'
 
 
 class TestJsonFormatter():
@@ -28,7 +28,7 @@ class TestJsonFormatter():
         factory = LoggerFactory("test", 'INFO')
         factory.add_handler(
                 handler='CONSOLE', 
-                is_json='True', 
+                is_json='False', 
                 format=DEFAULT_FORMAT, 
                 level='INFO')
         factory.add_handler(
@@ -55,5 +55,5 @@ class TestJsonFormatter():
 
 if __name__ == "__main__":
     test = TestJsonFormatter()
-    test.test_rotating_file_log()
+    test.test_log_factory()
 

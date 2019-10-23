@@ -1,0 +1,356 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AbstractCamera	../rpi/camera.py	/^class AbstractCamera(abc.ABC):$/;"	kind:class	line:10
+AbstractUploader	../rpi/upload.py	/^class AbstractUploader(abc.ABC):$/;"	kind:class	line:7
+AppShell	../app/app_shell.py	/^class AppShell(cmd.Cmd):$/;"	kind:class	line:3
+BaseHTTPServer	../app/file_server.py	/^from http.server import ThreadingHTTPServer as BaseHTTPServer, SimpleHTTPRequestHandler$/;"	kind:namespace	line:1
+BytesIO	../app/file_server.py	/^from io import BytesIO$/;"	kind:namespace	line:5
+BytesIO	../app/pic_persist.py	/^from io import BytesIO$/;"	kind:namespace	line:1
+BytesIO	../samples/display_demo.py	/^from io import BytesIO$/;"	kind:namespace	line:5
+BytesIO	../samples/yolo_demo.py	/^from io import BytesIO$/;"	kind:namespace	line:4
+COMMANDS_TOPIC	../app/pic_persist.py	/^COMMANDS_TOPIC = 'model_commands_2'$/;"	kind:variable	line:14
+CONF_FILE	../rpi/conf.py	/^CONF_FILE = CURRENT_DIR + '\/device_conf.ini'$/;"	kind:variable	line:15
+CURRENT_DIR	../app/collect_result.py	/^CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]$/;"	kind:variable	line:12
+CURRENT_DIR	../app/file_server.py	/^CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]$/;"	kind:variable	line:10
+CURRENT_DIR	../app/pic_persist.py	/^CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]$/;"	kind:variable	line:15
+CURRENT_DIR	../rpi/conf.py	/^CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]$/;"	kind:variable	line:14
+CURRENT_DIR	../rpi/imports.py	/^CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]$/;"	kind:variable	line:9
+Camera	../rpi/mac_camera.py	/^class Camera():$/;"	kind:class	line:13
+Camera	../rpi/pic_upload.py	/^class Camera():$/;"	kind:class	line:13
+CameraUtil	../rpi/camera.py	/^class CameraUtil():$/;"	kind:class	line:69
+CollectManager	../app/collect_result.py	/^class CollectManager(threading.Thread):$/;"	kind:class	line:20
+ConfigManager	../rpi/conf.py	/^class ConfigManager(threading.Thread):$/;"	kind:class	line:30
+ConfigManager	../rpi/mac_camera.py	/^from conf import ConfigManager$/;"	kind:namespace	line:3
+ConfigManager	../rpi/pic_upload.py	/^from conf import ConfigManager$/;"	kind:namespace	line:5
+DATA_DIR	../app/collect_result.py	/^DATA_DIR = PARENT_DIR + '\/data'$/;"	kind:variable	line:14
+DATA_DIR	../app/file_server.py	/^DATA_DIR = PARENT_DIR + '\/data'$/;"	kind:variable	line:12
+DATA_DIR	../app/pic_persist.py	/^DATA_DIR = PARENT_DIR + '\/data'$/;"	kind:variable	line:17
+DEFAULT_DURATION	../rpi/conf.py	/^DEFAULT_DURATION = '30'$/;"	kind:variable	line:28
+DEFAULT_FORMAT	../tests/test_logger.py	/^DEFAULT_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'$/;"	kind:variable	line:11
+DEFAULT_FORMAT	../tools/logger_utils.py	/^DEFAULT_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'$/;"	kind:variable	line:14
+DEFAULT_LOG_FORMAT	../rpi/imports.py	/^DEFAULT_LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'$/;"	kind:variable	line:8
+DataWatch	../rpi/conf.py	/^from kazoo.recipe.watchers import DataWatch$/;"	kind:namespace	line:12
+FileServer	../app/file_server.py	/^class FileServer(threading.Thread):$/;"	kind:class	line:102
+Flask	../app/restful_api.py	/^from flask import Flask, jsonify$/;"	kind:namespace	line:1
+Formatter	../tools/logger_utils.py	/^from logging import Formatter                                                          $/;"	kind:namespace	line:9
+HTTPHandler	../app/file_server.py	/^class HTTPHandler(SimpleHTTPRequestHandler):$/;"	kind:class	line:14
+HTTPServer	../app/file_server.py	/^class HTTPServer(BaseHTTPServer):$/;"	kind:class	line:94
+HttpUploader	../rpi/upload.py	/^class HttpUploader(AbstractUploader):$/;"	kind:class	line:20
+Image	../app/pic_persist.py	/^from PIL import Image$/;"	kind:namespace	line:3
+Image	../rpi/camera.py	/^from PIL import Image$/;"	kind:namespace	line:5
+Image	../rpi/mac_camera.py	/^from PIL import Image$/;"	kind:namespace	line:9
+Image	../samples/display_demo.py	/^from PIL import Image$/;"	kind:namespace	line:6
+Image	../samples/yolo_demo.py	/^from PIL import Image$/;"	kind:namespace	line:5
+JSONDecodeError	../app/collect_result.py	/^from json import JSONDecodeError$/;"	kind:namespace	line:7
+JsonEncoder	../tools/logger_utils.py	/^class JsonEncoder(json.JSONEncoder):$/;"	kind:class	line:99
+JsonFormatter	../rpi/imports.py	/^from tools.logger_utils import JsonFormatter, LoggerFactory$/;"	kind:namespace	line:7
+JsonFormatter	../tests/test_logger.py	/^from tools.logger_utils import JsonFormatter, LoggerFactory$/;"	kind:namespace	line:8
+JsonFormatter	../tools/logger_utils.py	/^class JsonFormatter(logging.Formatter):$/;"	kind:class	line:124
+KafkaClient	../rpi/mac_camera.py	/^class KafkaClient():$/;"	kind:class	line:27
+KafkaClient	../rpi/pic_upload.py	/^class KafkaClient():$/;"	kind:class	line:25
+KafkaConsumer	../app/collect_result.py	/^from kafka import KafkaConsumer$/;"	kind:namespace	line:1
+KafkaConsumer	../app/pic_persist.py	/^from kafka import KafkaConsumer$/;"	kind:namespace	line:4
+KafkaConsumer	../samples/display_demo.py	/^from kafka import KafkaConsumer$/;"	kind:namespace	line:3
+KafkaConsumer	../samples/yolo_demo.py	/^from kafka import KafkaConsumer$/;"	kind:namespace	line:2
+KafkaHandler	../tools/logger_utils.py	/^class KafkaHandler(StreamHandler):$/;"	kind:class	line:262
+KafkaProducer	../app/pic_persist.py	/^from kafka import KafkaProducer$/;"	kind:namespace	line:5
+KafkaProducer	../rpi/mac_camera.py	/^from kafka import KafkaProducer$/;"	kind:namespace	line:4
+KafkaProducer	../rpi/pic_upload.py	/^from kafka import KafkaProducer$/;"	kind:namespace	line:6
+KafkaProducer	../rpi/upload.py	/^from kafka import KafkaProducer$/;"	kind:namespace	line:2
+KafkaProducer	../tools/logger_utils.py	/^from kafka import KafkaProducer$/;"	kind:namespace	line:8
+KafkaUploader	../rpi/upload.py	/^class KafkaUploader(AbstractUploader):$/;"	kind:class	line:49
+KazooClient	../rpi/conf.py	/^from kazoo.client import KazooClient$/;"	kind:namespace	line:11
+LOG_FILE_NAME	../rpi/imports.py	/^LOG_FILE_NAME = 'rpi.log'$/;"	kind:variable	line:11
+LOG_FILE_PATH	../app/collect_result.py	/^LOG_FILE_PATH = LOG_PATH + 'main.log'$/;"	kind:variable	line:18
+LOG_FILE_PATH	../app/pic_persist.py	/^LOG_FILE_PATH = LOG_PATH + 'main.log'$/;"	kind:variable	line:20
+LOG_FILE_PATH	../rpi/conf.py	/^LOG_FILE_PATH = LOG_PATH + 'camera.log'$/;"	kind:variable	line:17
+LOG_PATH	../app/collect_result.py	/^LOG_PATH = CURRENT_DIR + '\/log\/'$/;"	kind:variable	line:17
+LOG_PATH	../app/pic_persist.py	/^LOG_PATH = CURRENT_DIR + '\/log\/'$/;"	kind:variable	line:19
+LOG_PATH	../rpi/conf.py	/^LOG_PATH = CURRENT_DIR + '\/log\/'$/;"	kind:variable	line:16
+LOG_PATH	../rpi/imports.py	/^LOG_PATH = CURRENT_DIR + '\/logs\/'$/;"	kind:variable	line:10
+LoggerFactory	../rpi/imports.py	/^from tools.logger_utils import JsonFormatter, LoggerFactory$/;"	kind:namespace	line:7
+LoggerFactory	../tests/test_logger.py	/^from tools.logger_utils import JsonFormatter, LoggerFactory$/;"	kind:namespace	line:8
+LoggerFactory	../tools/logger_utils.py	/^class LoggerFactory():$/;"	kind:class	line:34
+OrderedDict	../tools/logger_utils.py	/^from collections import OrderedDict$/;"	kind:namespace	line:12
+PARENT_DIR	../app/collect_result.py	/^PARENT_DIR = abspath(dirname(CURRENT_DIR))$/;"	kind:variable	line:13
+PARENT_DIR	../app/file_server.py	/^PARENT_DIR = abspath(dirname(CURRENT_DIR))$/;"	kind:variable	line:11
+PARENT_DIR	../app/pic_persist.py	/^PARENT_DIR = abspath(dirname(CURRENT_DIR))$/;"	kind:variable	line:16
+PersistanceManager	../app/pic_persist.py	/^class PersistanceManager(threading.Thread):$/;"	kind:class	line:22
+PiCamera	../rpi/camera.py	/^        from picamera import PiCamera$/;"	kind:namespace	line:50
+PiCamera	../rpi/pic_upload.py	/^from picamera import PiCamera$/;"	kind:namespace	line:1
+RESERVED_ATTRS	../tools/logger_utils.py	/^RESERVED_ATTRS = ($/;"	kind:variable	line:15
+RESULTS_TOPIC	../app/collect_result.py	/^RESULTS_TOPIC = 'model_results'$/;"	kind:variable	line:11
+RESULT_DIR	../app/collect_result.py	/^RESULT_DIR = PARENT_DIR + '\/out'$/;"	kind:variable	line:15
+RaspberryCamera	../rpi/camera.py	/^class RaspberryCamera(AbstractCamera):$/;"	kind:class	line:48
+RaspberryCamera	../rpi/pic_upload.py	/^from camera import RaspberryCamera, SystemCamera$/;"	kind:namespace	line:3
+SAMPLING_TOPIC	../app/pic_persist.py	/^SAMPLING_TOPIC = 'device_sampling'$/;"	kind:variable	line:13
+SAMPLING_TOPIC	../samples/display_demo.py	/^SAMPLING_TOPIC = 'device_sampling'$/;"	kind:variable	line:8
+SamplingProc	../rpi/mac_camera.py	/^class SamplingProc():$/;"	kind:class	line:39
+SamplingProc	../rpi/pic_upload.py	/^class SamplingProc():$/;"	kind:class	line:42
+SimpleHTTPRequestHandler	../app/file_server.py	/^from http.server import ThreadingHTTPServer as BaseHTTPServer, SimpleHTTPRequestHandler$/;"	kind:namespace	line:1
+StreamHandler	../tools/logger_utils.py	/^from logging import StreamHandler $/;"	kind:namespace	line:10
+SystemCamera	../rpi/camera.py	/^class SystemCamera(AbstractCamera):$/;"	kind:class	line:24
+SystemCamera	../rpi/pic_upload.py	/^from camera import RaspberryCamera, SystemCamera$/;"	kind:namespace	line:3
+TOPIC	../rpi/imports.py	/^TOPIC = "device_sampling"$/;"	kind:variable	line:14
+TOPIC	../rpi/mac_camera.py	/^TOPIC = "device_sampling"$/;"	kind:variable	line:11
+TOPIC	../samples/yolo_demo.py	/^TOPIC = 'model_results'$/;"	kind:variable	line:10
+TestJsonFormatter	../tests/test_logger.py	/^class TestJsonFormatter():$/;"	kind:class	line:14
+URL	../samples/yolo_demo.py	/^URL = 'http:\/\/10.249.77.82:8000\/'$/;"	kind:variable	line:12
+Utils	../tools/logger_utils.py	/^class Utils():$/;"	kind:class	line:25
+ZK_BROKERS_NODE	../rpi/conf.py	/^ZK_BROKERS_NODE = '\/brokers\/ids'$/;"	kind:variable	line:19
+ZK_DEVICE_DESC_KEY	../rpi/conf.py	/^ZK_DEVICE_DESC_KEY = 'description'$/;"	kind:variable	line:23
+ZK_DEVICE_DURATION_KEY	../rpi/conf.py	/^ZK_DEVICE_DURATION_KEY = 'duration'$/;"	kind:variable	line:26
+ZK_DEVICE_INIT_TS_KEY	../rpi/conf.py	/^ZK_DEVICE_INIT_TS_KEY = 'initial_ts'$/;"	kind:variable	line:24
+ZK_DEVICE_IP_KEY	../rpi/conf.py	/^ZK_DEVICE_IP_KEY = 'ip_address'$/;"	kind:variable	line:21
+ZK_DEVICE_LAST_TS_KEY	../rpi/conf.py	/^ZK_DEVICE_LAST_TS_KEY = 'last_ts'$/;"	kind:variable	line:25
+ZK_DEVICE_MAC_KEY	../rpi/conf.py	/^ZK_DEVICE_MAC_KEY = 'mac_address'$/;"	kind:variable	line:22
+ZK_ROOT_NODE	../rpi/conf.py	/^ZK_ROOT_NODE = '\/devices\/'$/;"	kind:variable	line:18
+__init__	../app/collect_result.py	/^    def __init__(self):$/;"	kind:member	line:21
+__init__	../app/file_server.py	/^    def __init__(self):$/;"	kind:member	line:103
+__init__	../app/file_server.py	/^    def __init__(self, base_path, server_address, RequestHandlerClass=HTTPHandler):$/;"	kind:member	line:96
+__init__	../app/pic_persist.py	/^    def __init__(self):$/;"	kind:member	line:23
+__init__	../rpi/camera.py	/^    def __init__(self, camera):$/;"	kind:member	line:70
+__init__	../rpi/camera.py	/^    def __init__(self, width, height, rotation):$/;"	kind:member	line:11
+__init__	../rpi/camera.py	/^    def __init__(self, width=640, height=480, rotation=0):$/;"	kind:member	line:25
+__init__	../rpi/camera.py	/^    def __init__(self, width=640, height=480, rotation=0):$/;"	kind:member	line:49
+__init__	../rpi/conf.py	/^    def __init__(self):$/;"	kind:member	line:31
+__init__	../rpi/mac_camera.py	/^    def __init__(self, brokers, topic):$/;"	kind:member	line:28
+__init__	../rpi/mac_camera.py	/^    def __init__(self, rotation=180, resolution=(640, 480)):$/;"	kind:member	line:14
+__init__	../rpi/mac_camera.py	/^    def __init__(self, topic):$/;"	kind:member	line:40
+__init__	../rpi/pic_upload.py	/^    def __init__(self, brokers, topic):$/;"	kind:member	line:26
+__init__	../rpi/pic_upload.py	/^    def __init__(self, rotation=180, resolution=(640, 480)):$/;"	kind:member	line:14
+__init__	../rpi/pic_upload.py	/^    def __init__(self, topic):$/;"	kind:member	line:43
+__init__	../rpi/upload.py	/^    def __init__(self, **kwargs):$/;"	kind:member	line:8
+__init__	../rpi/upload.py	/^    def __init__(self, brokers, topic):$/;"	kind:member	line:50
+__init__	../rpi/upload.py	/^    def __init__(self, server, port):$/;"	kind:member	line:21
+__init__	../tools/logger_utils.py	/^    def __init__(self, *args, **kwargs):$/;"	kind:member	line:130
+__init__	../tools/logger_utils.py	/^    def __init__(self, broker, topic):$/;"	kind:member	line:263
+__init__	../tools/logger_utils.py	/^    def __init__(self, name, level='WARNING'):$/;"	kind:member	line:35
+__init__.py	../tools/__init__.py	1;"	kind:file	line:1
+_add_duration_watcher	../rpi/conf.py	/^    def _add_duration_watcher(self, key):$/;"	kind:member	line:110
+_define_formatter	../tools/logger_utils.py	/^    def _define_formatter(self, is_json, format):$/;"	kind:member	line:71
+_duration_changed	../rpi/conf.py	/^    def _duration_changed(self, data, stat):$/;"	kind:member	line:114
+_get_ip_address	../rpi/conf.py	/^    def _get_ip_address(self):$/;"	kind:member	line:136
+_get_mac_address	../rpi/conf.py	/^    def _get_mac_address():$/;"	kind:member	line:141
+_get_timestamp_now	../rpi/conf.py	/^    def _get_timestamp_now():$/;"	kind:member	line:133
+_get_url	../rpi/upload.py	/^    def _get_url(self, dir):$/;"	kind:member	line:42
+_get_zk_device_info_path	../rpi/conf.py	/^    def _get_zk_device_info_path(self, key):$/;"	kind:member	line:129
+_get_zk_device_path	../rpi/conf.py	/^    def _get_zk_device_path(self):$/;"	kind:member	line:126
+_init_logger	../rpi/conf.py	/^    def _init_logger(self):$/;"	kind:member	line:69
+_load_local_conf	../rpi/conf.py	/^    def _load_local_conf(self):$/;"	kind:member	line:87
+_register_device	../rpi/conf.py	/^    def _register_device(self):$/;"	kind:member	line:93
+_save_pic_file	../app/pic_persist.py	/^    def _save_pic_file(self, device_id, filename, bin_stream):$/;"	kind:member	line:36
+_set_zk_device_info	../rpi/conf.py	/^    def _set_zk_device_info(self, key, value):$/;"	kind:member	line:118
+_str_to_fn	../tools/logger_utils.py	/^    def _str_to_fn(self, fn_as_str):$/;"	kind:member	line:171
+abc	../rpi/camera.py	/^import abc$/;"	kind:namespace	line:2
+abc	../rpi/upload.py	/^import abc$/;"	kind:namespace	line:4
+abspath	../app/collect_result.py	/^from os.path import dirname, abspath$/;"	kind:namespace	line:4
+abspath	../app/file_server.py	/^from os.path import dirname, abspath$/;"	kind:namespace	line:4
+abspath	../app/pic_persist.py	/^from os.path import dirname, abspath$/;"	kind:namespace	line:9
+add_fields	../tools/logger_utils.py	/^    def add_fields(self, log_record, record, message_dict):$/;"	kind:member	line:196
+add_handler	../tools/logger_utils.py	/^    def add_handler(self, **kwargs):$/;"	kind:member	line:40
+app	../app/restful_api.py	/^app = Flask(__name__)$/;"	kind:variable	line:3
+app_shell.py	../app/app_shell.py	1;"	kind:file	line:1
+argparse	../samples/display_demo.py	/^import argparse$/;"	kind:namespace	line:4
+argparse	../samples/yolo_demo.py	/^import argparse$/;"	kind:namespace	line:3
+args	../samples/display_demo.py	/^    args = parser.parse_args()$/;"	kind:variable	line:43
+args	../samples/yolo_demo.py	/^    args = parser.parse_args()$/;"	kind:variable	line:35
+b_key	../samples/display_demo.py	/^        b_key = msg.key$/;"	kind:variable	line:56
+b_picstream	../samples/display_demo.py	/^            b_picstream = msg.value$/;"	kind:variable	line:60
+boxes	../samples/plot_demo.py	/^    boxes = result_json['boxes']$/;"	kind:variable	line:33
+boxes	../samples/yolo_demo.py	/^            boxes = result_json['boxes']$/;"	kind:variable	line:50
+camera	../rpi/camera.py	/^    camera = SystemCamera()$/;"	kind:variable	line:88
+camera.py	../rpi/camera.py	1;"	kind:file	line:1
+capture	../rpi/camera.py	/^    def capture(self):$/;"	kind:member	line:21
+capture	../rpi/camera.py	/^    def capture(self):$/;"	kind:member	line:36
+capture	../rpi/camera.py	/^    def capture(self):$/;"	kind:member	line:60
+capture	../rpi/mac_camera.py	/^    def capture(self):$/;"	kind:member	line:19
+capture	../rpi/pic_upload.py	/^    def capture(self):$/;"	kind:member	line:19
+close	../rpi/mac_camera.py	/^    def close(self):$/;"	kind:member	line:36
+close	../rpi/pic_upload.py	/^    def close(self):$/;"	kind:member	line:37
+close	../rpi/upload.py	/^    def close(self):$/;"	kind:member	line:45
+close	../rpi/upload.py	/^    def close(self):$/;"	kind:member	line:68
+cm	../app/main.py	/^    cm = collect_result.CollectManager()$/;"	kind:variable	line:8
+cmd	../app/app_shell.py	/^import cmd$/;"	kind:namespace	line:1
+collect_result	../app/main.py	/^import collect_result$/;"	kind:namespace	line:3
+collect_result.py	../app/collect_result.py	1;"	kind:file	line:1
+conf.py	../rpi/conf.py	1;"	kind:file	line:1
+config	../rpi/conf.py	/^import logging.config$/;"	kind:namespace	line:6
+config_manager	../rpi/conf.py	/^    config_manager = ConfigManager()$/;"	kind:variable	line:163
+configparser	../rpi/conf.py	/^import configparser$/;"	kind:namespace	line:2
+cv2	../app/collect_result.py	/^import cv2$/;"	kind:namespace	line:5
+cv2	../rpi/mac_camera.py	/^import cv2$/;"	kind:namespace	line:1
+cv2	../samples/display_demo.py	/^import cv2$/;"	kind:namespace	line:2
+cv2	../samples/plot_demo.py	/^import cv2$/;"	kind:namespace	line:3
+cv2	../samples/yolo_demo.py	/^import cv2$/;"	kind:namespace	line:1
+daemon.py	../rpi/daemon.py	1;"	kind:file	line:1
+date	../tools/logger_utils.py	/^from datetime import date, datetime, time$/;"	kind:namespace	line:4
+datetime	../app/collect_result.py	/^from datetime import datetime$/;"	kind:namespace	line:9
+datetime	../app/pic_persist.py	/^from datetime import datetime$/;"	kind:namespace	line:6
+datetime	../rpi/camera.py	/^from datetime import datetime$/;"	kind:namespace	line:4
+datetime	../rpi/conf.py	/^from datetime import datetime$/;"	kind:namespace	line:10
+datetime	../rpi/mac_camera.py	/^from datetime import datetime$/;"	kind:namespace	line:2
+datetime	../rpi/pic_upload.py	/^from datetime import datetime$/;"	kind:namespace	line:4
+datetime	../tools/logger_utils.py	/^from datetime import date, datetime, time$/;"	kind:namespace	line:4
+deal_post_stream	../app/file_server.py	/^    def deal_post_stream(self):$/;"	kind:member	line:49
+default	../tools/logger_utils.py	/^    def default(self, obj):$/;"	kind:member	line:103
+destroy	../rpi/conf.py	/^    def destroy(self):$/;"	kind:member	line:158
+destroy	../rpi/mac_camera.py	/^    def destroy(self):$/;"	kind:member	line:68
+destroy	../rpi/pic_upload.py	/^    def destroy(self):$/;"	kind:member	line:65
+device_arg	../samples/display_demo.py	/^    device_arg = args.device$/;"	kind:variable	line:44
+device_arg	../samples/yolo_demo.py	/^    device_arg = args.device$/;"	kind:variable	line:36
+device_id	../samples/plot_demo.py	/^    device_id = result_json['device_id']$/;"	kind:variable	line:31
+device_id	../samples/yolo_demo.py	/^            device_id = result_json['device_id']$/;"	kind:variable	line:48
+dir_path	../rpi/imports.py	/^dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:3
+dir_path	../tests/test_logger.py	/^dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:6
+dirname	../app/collect_result.py	/^from os.path import dirname, abspath$/;"	kind:namespace	line:4
+dirname	../app/file_server.py	/^from os.path import dirname, abspath$/;"	kind:namespace	line:4
+dirname	../app/pic_persist.py	/^from os.path import dirname, abspath$/;"	kind:namespace	line:9
+display_demo.py	../samples/display_demo.py	1;"	kind:file	line:1
+do_POST	../app/file_server.py	/^    def do_POST(self):$/;"	kind:member	line:22
+draw_circle	../samples/display_demo.py	/^def draw_circle(event,x,y,flags,param):$/;"	kind:function	line:19
+draw_rectangle	../app/collect_result.py	/^    def draw_rectangle(self, device_id, file_name, boxes):$/;"	kind:member	line:34
+draw_rectangle	../samples/plot_demo.py	/^def draw_rectangle(file_path, boxes):$/;"	kind:function	line:11
+draw_rectangle	../samples/yolo_demo.py	/^def draw_rectangle(title, device_id, file_name, boxes):$/;"	kind:function	line:14
+drawing	../samples/display_demo.py	/^drawing = False # true if mouse is pressed$/;"	kind:variable	line:14
+emit	../tools/logger_utils.py	/^    def emit(self, record):$/;"	kind:member	line:269
+execute	../rpi/mac_camera.py	/^    def execute(self):$/;"	kind:member	line:48
+execute	../rpi/pic_upload.py	/^    def execute(self):$/;"	kind:member	line:51
+file_name	../samples/plot_demo.py	/^    file_name = result_json['file_name']$/;"	kind:variable	line:32
+file_name	../samples/yolo_demo.py	/^            file_name = result_json['file_name']$/;"	kind:variable	line:49
+file_path	../samples/plot_demo.py	/^file_path = '.\/b827ebf39c8c_1569446912.jpg'$/;"	kind:variable	line:8
+file_server	../app/main.py	/^import file_server$/;"	kind:namespace	line:2
+file_server.py	../app/file_server.py	1;"	kind:file	line:1
+filename	../samples/display_demo.py	/^        filename = b_key.decode('utf-8')$/;"	kind:variable	line:57
+fileserver	../app/file_server.py	/^    fileserver = FileServer()$/;"	kind:variable	line:111
+format	../tools/logger_utils.py	/^    def format(self, record):$/;"	kind:member	line:224
+format_datetime_obj	../tools/logger_utils.py	/^    def format_datetime_obj(self, obj):$/;"	kind:member	line:120
+frame	../samples/display_demo.py	/^            frame = img2nparray(b_picstream)$/;"	kind:variable	line:62
+fs	../app/main.py	/^    fs = file_server.FileServer()$/;"	kind:variable	line:7
+get_camera_rotation	../rpi/conf.py	/^    def get_camera_rotation(self):$/;"	kind:member	line:56
+get_description	../rpi/conf.py	/^    def get_description(self):$/;"	kind:member	line:44
+get_device_id	../rpi/conf.py	/^    def get_device_id(self):$/;"	kind:member	line:47
+get_duration	../rpi/conf.py	/^    def get_duration(self):$/;"	kind:member	line:53
+get_kafka_brokers	../rpi/conf.py	/^    def get_kafka_brokers(self):$/;"	kind:member	line:59
+get_logger	../tools/logger_utils.py	/^    def get_logger(self):$/;"	kind:member	line:79
+get_zk_servers	../rpi/conf.py	/^    def get_zk_servers(self):$/;"	kind:member	line:50
+heartbeat_listener.py	../app/heartbeat_listener.py	1;"	kind:file	line:1
+img	../samples/display_demo.py	/^    img = numpy.zeros((640,480,3), numpy.uint8)$/;"	kind:variable	line:49
+img	../samples/plot_demo.py	/^    img = draw_rectangle(file_path, boxes)$/;"	kind:variable	line:34
+img2nparray	../samples/display_demo.py	/^def img2nparray(stream):$/;"	kind:function	line:10
+importlib	../tools/logger_utils.py	/^import importlib$/;"	kind:namespace	line:6
+imports.py	../rpi/imports.py	1;"	kind:file	line:1
+intro	../app/app_shell.py	/^    intro = 'Welcome to the on-prem AI shell.\\n Type help or ? to list commands.\\n'$/;"	kind:variable	line:4
+io	../rpi/camera.py	/^import io$/;"	kind:namespace	line:3
+io	../rpi/mac_camera.py	/^import io$/;"	kind:namespace	line:5
+io	../rpi/pic_upload.py	/^import io$/;"	kind:namespace	line:7
+istraceback	../tools/logger_utils.py	/^from inspect import istraceback$/;"	kind:namespace	line:11
+json	../app/collect_result.py	/^import json$/;"	kind:namespace	line:6
+json	../app/pic_persist.py	/^import json$/;"	kind:namespace	line:10
+json	../rpi/conf.py	/^import json$/;"	kind:namespace	line:7
+json	../samples/plot_demo.py	/^import json$/;"	kind:namespace	line:2
+json	../samples/yolo_demo.py	/^import json$/;"	kind:namespace	line:8
+json	../tests/test_logger.py	/^import json$/;"	kind:namespace	line:3
+json	../tools/logger_utils.py	/^import json$/;"	kind:namespace	line:2
+jsonify	../app/restful_api.py	/^from flask import Flask, jsonify$/;"	kind:namespace	line:1
+jsonify_log_record	../tools/logger_utils.py	/^    def jsonify_log_record(self, log_record):$/;"	kind:member	line:216
+kafka_consumer	../samples/display_demo.py	/^    kafka_consumer = KafkaConsumer(SAMPLING_TOPIC, bootstrap_servers= ['10.249.77.87:9092'], api_version=(0,10))$/;"	kind:variable	line:47
+kafka_consumer	../samples/yolo_demo.py	/^    kafka_consumer = KafkaConsumer(TOPIC, bootstrap_servers= ['10.249.77.87:9092'], api_version=(0,10))$/;"	kind:variable	line:39
+level_dict	../tools/logger_utils.py	/^level_dict = {"INFO": logging.INFO, "DEBUG": logging.DEBUG, $/;"	kind:variable	line:21
+log_level	../tools/logger_utils.py	/^    def log_level(levelname):$/;"	kind:member	line:31
+logger_utils.py	../tools/logger_utils.py	1;"	kind:file	line:1
+logging	../app/collect_result.py	/^import logging$/;"	kind:namespace	line:8
+logging	../app/pic_persist.py	/^import logging$/;"	kind:namespace	line:11
+logging	../rpi/conf.py	/^import logging$/;"	kind:namespace	line:5
+logging	../rpi/conf.py	/^import logging.config$/;"	kind:namespace	line:6
+logging	../rpi/mac_camera.py	/^import logging$/;"	kind:namespace	line:8
+logging	../rpi/pic_upload.py	/^import logging$/;"	kind:namespace	line:10
+logging	../tests/test_logger.py	/^import logging$/;"	kind:namespace	line:2
+logging	../tools/logger_utils.py	/^import logging$/;"	kind:namespace	line:1
+mac_camera.py	../rpi/mac_camera.py	1;"	kind:file	line:1
+main.py	../app/main.py	1;"	kind:file	line:1
+merge_record_extra	../tools/logger_utils.py	/^def merge_record_extra(record, target, reserved):$/;"	kind:function	line:83
+mimetypes	../app/file_server.py	/^import mimetypes$/;"	kind:namespace	line:6
+mode	../samples/display_demo.py	/^mode = True # if True, draw rectangle. Press 'm' to toggle to curve$/;"	kind:variable	line:15
+netifaces	../rpi/conf.py	/^import netifaces$/;"	kind:namespace	line:4
+np	../samples/yolo_demo.py	/^import numpy as np$/;"	kind:namespace	line:7
+numpy	../samples/display_demo.py	/^import numpy$/;"	kind:namespace	line:1
+offset	../samples/display_demo.py	/^        offset = msg.offset$/;"	kind:variable	line:55
+os	../app/collect_result.py	/^import os$/;"	kind:namespace	line:3
+os	../app/file_server.py	/^import os$/;"	kind:namespace	line:2
+os	../app/pic_persist.py	/^import os$/;"	kind:namespace	line:8
+os	../rpi/conf.py	/^import os$/;"	kind:namespace	line:9
+os	../rpi/imports.py	/^import os$/;"	kind:namespace	line:2
+os	../rpi/mac_camera.py	/^import os$/;"	kind:namespace	line:6
+os	../rpi/pic_upload.py	/^import os$/;"	kind:namespace	line:8
+os	../tests/test_logger.py	/^import os$/;"	kind:namespace	line:5
+parse	../tools/logger_utils.py	/^    def parse(self):$/;"	kind:member	line:186
+parser	../samples/display_demo.py	/^    parser = argparse.ArgumentParser()$/;"	kind:variable	line:41
+parser	../samples/yolo_demo.py	/^    parser = argparse.ArgumentParser()$/;"	kind:variable	line:33
+pic_persist	../app/main.py	/^import pic_persist$/;"	kind:namespace	line:1
+pic_persist.py	../app/pic_persist.py	1;"	kind:file	line:1
+pic_upload.py	../rpi/pic_upload.py	1;"	kind:file	line:1
+plot_demo.py	../samples/plot_demo.py	1;"	kind:file	line:1
+plot_json	../samples/plot_demo.py	/^plot_json = '{"device_id":"b827ebf39c8c","file_name":"b827ebf39c8c_1569446912.jpg","boxes":[{"activities":["sitting","talking"],"loc":[92,59,100,189]}]}'$/;"	kind:variable	line:9
+pm	../app/main.py	/^    pm = pic_persist.PersistanceManager()$/;"	kind:variable	line:6
+pm	../app/pic_persist.py	/^    pm = PersistanceManager()$/;"	kind:variable	line:69
+proc	../rpi/mac_camera.py	/^    proc = SamplingProc(topic=TOPIC)$/;"	kind:variable	line:74
+proc	../rpi/pic_upload.py	/^    proc = SamplingProc(topic=TOPIC)$/;"	kind:variable	line:71
+process_log_record	../tools/logger_utils.py	/^    def process_log_record(self, log_record):$/;"	kind:member	line:209
+prompt	../app/app_shell.py	/^    prompt = '(on-prem) '$/;"	kind:variable	line:5
+pytest	../tests/test_logger.py	/^import pytest$/;"	kind:namespace	line:1
+raw_value	../samples/yolo_demo.py	/^            raw_value = msg.value.decode('utf-8')$/;"	kind:variable	line:46
+re	../app/file_server.py	/^import re$/;"	kind:namespace	line:7
+re	../tools/logger_utils.py	/^import re$/;"	kind:namespace	line:3
+requests	../rpi/upload.py	/^import requests$/;"	kind:namespace	line:3
+requests	../samples/yolo_demo.py	/^import requests$/;"	kind:namespace	line:6
+restful_api.py	../app/restful_api.py	1;"	kind:file	line:1
+result_json	../samples/plot_demo.py	/^    result_json = json.loads(plot_json)$/;"	kind:variable	line:30
+result_json	../samples/yolo_demo.py	/^            result_json = json.loads(raw_value)$/;"	kind:variable	line:47
+run	../app/collect_result.py	/^    def run(self):$/;"	kind:member	line:72
+run	../app/file_server.py	/^    def run(self):$/;"	kind:member	line:107
+run	../app/pic_persist.py	/^    def run(self):$/;"	kind:member	line:51
+run	../rpi/conf.py	/^    def run(self):$/;"	kind:member	line:147
+save_five_pic_per_5second	../rpi/camera.py	/^    def save_five_pic_per_5second(self, file_prefix):$/;"	kind:member	line:78
+save_one_pic	../rpi/camera.py	/^    def save_one_pic(self, file_name):$/;"	kind:member	line:73
+save_result_img	../app/collect_result.py	/^    def save_result_img(self, device_id, file_name, img):$/;"	kind:member	line:48
+save_result_img	../samples/plot_demo.py	/^def save_result_img(img):$/;"	kind:function	line:24
+save_result_log	../app/collect_result.py	/^    def save_result_log(self, device_id, date, raw_value):$/;"	kind:member	line:57
+send_model_json	../app/pic_persist.py	/^    def send_model_json(self, key, value):$/;"	kind:member	line:47
+send_pic_buf	../rpi/mac_camera.py	/^    def send_pic_buf(self, key, value):$/;"	kind:member	line:32
+send_pic_buf	../rpi/pic_upload.py	/^    def send_pic_buf(self, key, value):$/;"	kind:member	line:30
+send_pic_buf	../rpi/upload.py	/^    def send_pic_buf(self, dir, file_name, stream):$/;"	kind:member	line:17
+send_pic_buf	../rpi/upload.py	/^    def send_pic_buf(self, dir, file_name, stream):$/;"	kind:member	line:29
+send_pic_buf	../rpi/upload.py	/^    def send_pic_buf(self, dir, file_name, stream):$/;"	kind:member	line:58
+server_conf_reader.py	../app/server_conf_reader.py	1;"	kind:file	line:1
+shutil	../app/file_server.py	/^import shutil$/;"	kind:namespace	line:8
+sleep	../app/pic_persist.py	/^from time import sleep$/;"	kind:namespace	line:2
+str_eq	../tools/logger_utils.py	/^    def str_eq(ins, enum):$/;"	kind:member	line:27
+sys	../rpi/imports.py	/^import sys$/;"	kind:namespace	line:1
+sys	../tests/test_logger.py	/^import sys$/;"	kind:namespace	line:4
+test	../tests/test_logger.py	/^    test = TestJsonFormatter()$/;"	kind:variable	line:36
+test_json_log	../tests/test_logger.py	/^    def test_json_log(self):$/;"	kind:member	line:16
+test_log_factory	../tests/test_logger.py	/^    def test_log_factory(self):$/;"	kind:member	line:26
+test_logger.py	../tests/test_logger.py	1;"	kind:file	line:1
+threading	../app/collect_result.py	/^import threading$/;"	kind:namespace	line:2
+threading	../app/file_server.py	/^import threading$/;"	kind:namespace	line:3
+threading	../app/pic_persist.py	/^import threading$/;"	kind:namespace	line:7
+threading	../rpi/conf.py	/^import threading$/;"	kind:namespace	line:3
+time	../rpi/camera.py	/^import time$/;"	kind:namespace	line:6
+time	../rpi/conf.py	/^import time$/;"	kind:namespace	line:8
+time	../rpi/mac_camera.py	/^import time$/;"	kind:namespace	line:7
+time	../rpi/pic_upload.py	/^import time$/;"	kind:namespace	line:9
+time	../tools/logger_utils.py	/^from datetime import date, datetime, time$/;"	kind:namespace	line:4
+title	../samples/display_demo.py	/^            title = "device_id:" + device_id$/;"	kind:variable	line:61
+title	../samples/display_demo.py	/^    title = "device_id:" + device_arg$/;"	kind:variable	line:50
+title	../samples/yolo_demo.py	/^    title = "device_id:" + device_arg$/;"	kind:variable	line:41
+traceback	../tools/logger_utils.py	/^import traceback$/;"	kind:namespace	line:5
+translate_path	../app/file_server.py	/^    def translate_path(self, path):$/;"	kind:member	line:16
+upload.py	../rpi/upload.py	1;"	kind:file	line:1
+util	../rpi/camera.py	/^    util = CameraUtil(camera)$/;"	kind:variable	line:90
+uuid	../rpi/conf.py	/^        import uuid$/;"	kind:namespace	line:142
+yolo_demo.py	../samples/yolo_demo.py	1;"	kind:file	line:1

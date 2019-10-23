@@ -32,6 +32,9 @@ class HttpUploader(AbstractUploader):
     def send_pic_buf(self, dir, file_name, stream):
         try:
             http_url = self._get_url(dir)
+            if not stream:
+                self._logger.error(file_name + "is None")
+                return (False, file_name + "is None")
             upload_file = {file_name: stream}
             resp = requests.post(http_url, files=upload_file)
             if resp.ok:
@@ -63,6 +66,9 @@ class KafkaUploader(AbstractUploader):
     
     def send_pic_buf(self, dir, file_name, stream):
         try:
+            if not stream:
+                self._logger.error(file_name + "is None")
+                return (False, file_name + "is None")
             key = bytes(file_name, 'ascii')
             future = self._producer.send(self._topic, key=key, value=stream, partition=0)
             future.get(timeout=10)

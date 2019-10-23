@@ -7,6 +7,17 @@ from datetime import datetime
 import sys
 import traceback
 
+def timestamp_string():
+    return str(int(time.time()))
+
+def json_log_build(conf, msg):
+    content = {}
+    content['device_id'] = conf.get_device_id()
+    content['device_ip'] = conf.get_ip_address()
+    content['timestamp'] = timestamp_string()
+    content['msg'] = msg
+    content['device_stg'] = conf.get_instruction()
+    return content
 
 class StateController():
     def __init__(self, **kwargs):
@@ -43,12 +54,14 @@ class StateController():
                     if residue > 0:
                         time.sleep(residue)
                 except SystemExit as e:
-                    self._logger.error("SystemExit")
+                    info = json_log_build(self._config, "SystemExit")
+                    self._logger.error(info)
                     self.release()
                     self._config.join()
                     break
                 except Exception as e:
-                    self._logger.error(repr(e))
+                    info = json_log_build(self._config, repr(e))
+                    self._logger.error(info)
                     time.sleep(15)
         finally:
             pass
@@ -67,7 +80,8 @@ class StateController():
         file_name = device_id + '_' + ts_str + '.jpg'
         status, msg = self._uploader.send_pic_buf(device_id, file_name, b_stream)
         if not status:
-            self._logger.error(msg)
+            info = json_log_build(self._config, msg)
+            self._logger.error(info)
 
     def _action_hang(self):
         # do nothing

@@ -3,14 +3,12 @@ import configparser
 import threading
 import netifaces
 import logging
-import logging.config
 import json
 import time
 import os
 from datetime import datetime
 from kazoo.client import KazooClient
 from kazoo.recipe.watchers import DataWatch
-import traceback
 
 
 class ConfigManager(threading.Thread):
@@ -25,7 +23,7 @@ class ConfigManager(threading.Thread):
         self.logger = loggerfactory.get_logger()
         self.conf = configparser.ConfigParser()
         if len(self.conf.read(GLB_CONF_FILE)) == 0:
-            self.logger.error("reading config file %s fails", GLB_CONF_FILE)
+            self.logger.error("reading config file %s fails" % GLB_CONF_FILE)
             raise RuntimeError("reading config file %s fails" % GLB_CONF_FILE)
         ## read conf from local conf_file
         self._load_local_conf()
@@ -41,6 +39,9 @@ class ConfigManager(threading.Thread):
 
     def get_device_id(self):
         return self.mac_address
+
+    def get_ip_address(self):
+        return self.ip_address
 
     def get_zk_servers(self):
         return self.zk_servers
@@ -125,11 +126,11 @@ class ConfigManager(threading.Thread):
 
     def _set_zk_device_info(self, key, value):
         zk_node = self._get_zk_device_info_path(key)
-        if self.zk_client.ensure_path(zk_node):
-            if self.zk_client.ensure_path(zk_node):
+        if True != self.zk_client.ensure_path(zk_node):
+            if True == self.zk_client.ensure_path(zk_node):
                 self.zk_client.set(zk_node, bytes(value, 'ascii'))
             else:
-                self.logger.error("creating zk device info %s fails", zk_node)
+                self.logger.error("creating zk device info %s fails" % zk_node)
 
     def _get_zk_device_path(self):
         return ZK_ROOT_NODE + self.mac_address
@@ -154,16 +155,17 @@ class ConfigManager(threading.Thread):
 
     def run(self):
         while True:
+            time.sleep(15)
             try:
                 system_heartbeat = ConfigManager._get_timestamp_now()
                 current_heartbeat = system_heartbeat if self.active_heartbeat else self.heartbeat
                 if self._registered_state:
                     self._set_zk_device_info(ZK_DEVICE_LAST_TS_KEY, current_heartbeat)
-                time.sleep(15)
                 if self._stop_thread:
                     break
             except Exception as e:
                 self.logger.error(repr(e))
+
         self.release()
 
     def release(self):

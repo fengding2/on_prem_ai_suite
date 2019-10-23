@@ -1,0 +1,122 @@
+{
+  "type" : "record",
+  "name" : "MyClass",
+  "namespace" : "com.test.avro",
+  "fields" : [ {
+    "name" : "verb",
+    "type" : "string"
+  }, {
+    "name" : "actor",
+    "type" : {
+      "type" : "record",
+      "name" : "actor",
+      "fields" : [ {
+        "name" : "mac",
+        "type" : "string"
+      }, {
+        "name" : "displayName",
+        "type" : "string"
+      }, {
+        "name" : "type",
+        "type" : "string"
+      }, {
+        "name" : "id",
+        "type" : "string"
+      } ]
+    }
+  }, {
+    "name" : "ec_event_time",
+    "type" : "long"
+  }, {
+    "name" : "location",
+    "type" : {
+      "type" : "record",
+      "name" : "location",
+      "fields" : [ {
+        "name" : "type",
+        "type" : "string"
+        "default": "Floor"
+      }, {
+        "name" : "id",
+        "type" : "string"
+      }, {
+        "name" : "cityName",
+        "type" : "string"
+      }, {
+        "name" : "buildingName",
+        "type" : "string"
+      }, {
+        "name" : "floorName",
+        "type" : "string"
+      }, {
+        "name" : "floor",
+        "type" : "long"
+      }, {
+        "name" : "timezone",
+        "type" : "string"
+      }, {
+        "name" : "longitude",
+        "type" : "double"
+      }, {
+        "name" : "latitude",
+        "type" : "long"
+      } ]
+    }
+  }, {
+    "name" : "result",
+    "type" : {
+      "type" : "record",
+      "name" : "result",
+      "fields" : [ {
+        "name" : "count",
+        "type" : "long"
+      }, {
+        "name" : "positions",
+        "type" : {
+          "type" : "array",
+          "items" : {
+            "type" : "record",
+            "name" : "positions",
+            "fields" : [ {
+              "name" : "h",
+              "type" : "long"
+            }, {
+              "name" : "x",
+              "type" : "long"
+            }, {
+              "name" : "w",
+              "type" : "long"
+            }, {
+              "name" : "y",
+              "type" : "long"
+            } ]
+          }
+        }
+      }, {
+        "name" : "behaviors",
+        "type" : {
+          "type" : "array",
+          "items" : "string"
+        }
+      }, {
+        "name" : "areas",
+        "type" : {
+          "type" : "array",
+          "items" : "string"
+        }
+      }, {
+        "name" : "source",
+        "type" : "string"
+      }, {
+        "name" : "type",
+        "type" : "string"
+      } ]
+    }
+  }, {
+    "name" : "publish",
+    "type" : "string"
+  }, {
+    "name" : "ec_event_id",
+    "type" : "string"
+  } ]
+}
