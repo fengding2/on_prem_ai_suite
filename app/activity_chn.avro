@@ -115,19 +115,19 @@
             "fields" : [ {
               "name" : "h",
               "doc": "doc",
-              "type" : "double"
+              "type" : "long"
             }, {
               "name" : "x",
               "doc": "doc",
-              "type" : "double"
+              "type" : "long"
             }, {
               "name" : "w",
               "doc": "doc",
-              "type" : "double"
+              "type" : "long"
             }, {
               "name" : "y",
               "doc": "doc",
-              "type" : "double"
+              "type" : "long"
             } ]
           }
         }

@@ -7,6 +7,12 @@ verify_ssl = true
 
 [packages]
 requests = "*"
+kafka-python = "*"
+kazoo = "*"
+flask = "*"
+flask-restful = "*"
+pillow = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.7"

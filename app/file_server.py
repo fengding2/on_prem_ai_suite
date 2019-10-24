@@ -71,7 +71,8 @@ class HTTPHandler(SimpleHTTPRequestHandler):
         path = self.translate_path(self.path)
         if not os.path.exists(path):
             os.makedirs(path)
-        fn = os.path.join(path, fn[0])
+        file_name = fn[0]
+        fn = os.path.join(path, file_name)
         line = self.rfile.readline()
         remainbytes -= len(line)
         #line = self.rfile.readline()
@@ -92,7 +93,7 @@ class HTTPHandler(SimpleHTTPRequestHandler):
                     preline = preline[0:-1]
                 out.write(preline)
                 out.close()
-                return (True, fn)
+                return (True, file_name)
             else:
                 out.write(preline)
                 preline = line

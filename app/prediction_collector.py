@@ -13,9 +13,9 @@ import uuid
 ## utility for constructing dashboard data
 def dashboard_data(device_id, desc, file_name, boxes):
     data = {}
-    data["actor"] = {"type": "Camera", "displayName": "Raspberry Pi", "id": device_id, "mac": device_id}
+    data["actor"] = {"type": "Camera", "displayName": desc, "id": device_id, "mac": device_id}
     data["verb"] = "recognize"
-    data["location"] =  {"id": "b12-asdf-afa", "type": "Floor"}   
+    data["location"] =  {"id": "b12-asdf-afa", "type": "Floor", "cityName": "shanghai", "buildingName": "zhonghai", "floorName": "third floor", "floor": 3, "timezone": "Asia/shanghai", "longitude": 103.23, "latitude": 23.0}   
     data["publish"] = datetime.now().strftime("%Y-%M-%d, %H:%M:%S")
     data["ec_event_time"] = int(time.time() * 1000)
     data["ec_event_id"] = str(uuid.uuid1())

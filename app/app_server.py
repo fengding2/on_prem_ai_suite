@@ -67,8 +67,9 @@ api.add_resource(DevicesQuery, '/api/query/')
 if __name__ == "__main__":
     kafka_brokers = configurer.get_kafka_brokers()
     cmd_sender = CommandMsgHandler(kafka_brokers, KAFKA_COMMANDS_TOPIC)
-    dashboard_sender = DashboardMsgHandler(appname=DASHBOARD_APPNAME, secret=DASHBOARD_PSWORD)
-    dashboard_sender.register_schema(DASHBOARD_SCHEMA_PATH, eventname=DASHBOARD_EVENTNAME)
+    #dashboard_sender = DashboardMsgHandler(appname=DASHBOARD_APPNAME, secret=DASHBOARD_PSWORD)
+    #dashboard_sender.register_schema(DASHBOARD_SCHEMA_PATH, eventname=DASHBOARD_EVENTNAME)
+    dashboard_sender = None
     collector = CollectManager(brokers=kafka_brokers, topic=KAFKA_PREDICTION_TOPIC, publisher=dashboard_sender, configurer=configurer)
 
     file_server = FileServer(msg_handler=cmd_sender)

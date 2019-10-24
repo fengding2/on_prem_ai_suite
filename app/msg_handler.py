@@ -2,8 +2,7 @@ from app_global_imports import *
 import time
 import os
 import asyncio
-import we.eventcollector.ec as event_collector
-from we.eventcollector.serialization import parse_schema
+
 from kafka import KafkaProducer
 
 class CommandMsgHandler():
@@ -14,9 +13,10 @@ class CommandMsgHandler():
     def send_message(self, key, value):
         self.kafka_client.send(self.topic, key=key, value=value, partition=0)
 
-
 class DashboardMsgHandler():
     def __init__(self, appname='appliedscience', version="v1", secret="a test secret", timeout=10):
+        import we.eventcollector.ec as event_collector
+        from we.eventcollector.serialization import parse_schema
         self.ec = event_collector.EventRegister(DASHBOARD_URL, appname, version, secret, timeout=timeout)
 
     def _set_loop(self):
@@ -46,17 +46,3 @@ class DashboardMsgHandler():
         ## TODO: WHY set loop
         self._set_loop()
         asyncio.get_event_loop().run_until_complete(self._send_data(json_data))
-
-
-if __name__ == "__main__":
-    from prediction_collector import dashboard_data
-    dashboard_sender = DashboardMsgHandler(appname=DASHBOARD_APPNAME, secret=DASHBOARD_PSWORD)
-    dashboard_sender.register_schema(DASHBOARD_SCHEMA_PATH, eventname=DASHBOARD_EVENTNAME)
-    i = 0
-    while True:
-        data = dashboard_data('test_device1', 'desc_test', 'a.jpg', [])
-        dashboard_sender.send_data(data)
-        time.sleep(1)
-        i = i + 1
-        if i > 10:
-            break
