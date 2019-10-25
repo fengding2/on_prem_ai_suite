@@ -3,7 +3,7 @@ from flask import Flask, jsonify
 from flask_restful import Api, Resource, reqparse, abort
 from server_conf import ServerConf
 from zk_service import ZookeeperService
-from msg_handler import CommandMsgHandler, DashboardMsgHandler
+from msg_handler import CommandMsgHandler 
 from file_server import FileServer
 from prediction_collector import CollectManager
 
@@ -67,12 +67,9 @@ api.add_resource(DevicesQuery, '/api/query/')
 if __name__ == "__main__":
     kafka_brokers = configurer.get_kafka_brokers()
     cmd_sender = CommandMsgHandler(kafka_brokers, KAFKA_COMMANDS_TOPIC)
-    #dashboard_sender = DashboardMsgHandler(appname=DASHBOARD_APPNAME, secret=DASHBOARD_PSWORD)
-    #dashboard_sender.register_schema(DASHBOARD_SCHEMA_PATH, eventname=DASHBOARD_EVENTNAME)
-    dashboard_sender = None
-    collector = CollectManager(brokers=kafka_brokers, topic=KAFKA_PREDICTION_TOPIC, publisher=dashboard_sender, configurer=configurer)
+    collector = CollectManager(brokers=kafka_brokers, topic=KAFKA_PREDICTION_TOPIC, configurer=configurer, use_publisher=True)
+    collector.start()
 
     file_server = FileServer(msg_handler=cmd_sender)
     file_server.start()
     app.run()
-    collector.start()

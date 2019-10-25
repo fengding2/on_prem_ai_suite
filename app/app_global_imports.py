@@ -60,3 +60,6 @@ def is_empty_list(param):
 ##------- initial device log directory -------
 if not os.path.exists(LOG_PATH):
     os.makedirs(LOG_PATH)
+
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)

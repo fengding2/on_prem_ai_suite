@@ -1,5 +1,6 @@
 from app_global_imports import *
 from kafka import KafkaConsumer
+from msg_handler import DashboardMsgHandler
 import threading
 import json
 from json import JSONDecodeError
@@ -16,7 +17,7 @@ def dashboard_data(device_id, desc, file_name, boxes):
     data["actor"] = {"type": "Camera", "displayName": desc, "id": device_id, "mac": device_id}
     data["verb"] = "recognize"
     data["location"] =  {"id": "b12-asdf-afa", "type": "Floor", "cityName": "shanghai", "buildingName": "zhonghai", "floorName": "third floor", "floor": 3, "timezone": "Asia/shanghai", "longitude": 103.23, "latitude": 23.0}   
-    data["publish"] = datetime.now().strftime("%Y-%M-%d, %H:%M:%S")
+    data["publish"] = datetime.now().strftime("%Y-%m-%d, %H:%M:%S")
     data["ec_event_time"] = int(time.time() * 1000)
     data["ec_event_id"] = str(uuid.uuid1())
     data["result"] = {}
@@ -40,17 +41,21 @@ def dashboard_data(device_id, desc, file_name, boxes):
 
 
 class CollectManager(threading.Thread):
-    def __init__(self, brokers, topic, publisher=None, configurer=None):
+    def __init__(self, brokers, topic, configurer=None, use_publisher=False):
         threading.Thread.__init__(self)
         loggerfactory = LoggerFactory(__name__)
         loggerfactory.add_handler(handler='TIME_FILE', format=DEFAULT_LOG_FORMAT, 
         log_dir=LOG_PATH, log_name=LOG_FILE_NAME)
+        AreaSlicer.pre_load()
         self.logger = loggerfactory.get_logger()
         self.kafka_consumer = KafkaConsumer(topic, bootstrap_servers=brokers, api_version=(0,10))
         self.file_handlers = {}
-        self.publisher = publisher
+        if use_publisher:
+            self.publisher = DashboardMsgHandler(appname=DASHBOARD_APPNAME, secret=DASHBOARD_PSWORD)
+            self.publisher.register_schema(DASHBOARD_SCHEMA_PATH, eventname=DASHBOARD_EVENTNAME)
+        else:
+            self.publisher = None
         self.configurer = configurer
-        AreaSlicer.pre_load()
 
     def save_backup_log(self, device_id, date, raw_value):
         file_name = device_id + '_' + date + '.txt'
@@ -82,17 +87,21 @@ class CollectManager(threading.Thread):
             self.publisher.send_data(data_to_send)
 
     def run(self):
-        for msg in self.kafka_consumer:
-            try:
-                raw_value = msg.value.decode('utf-8')
-                result_json = json.loads(raw_value)
-                device_id = result_json['device_id']
-                file_name = result_json['file_name']
-                boxes = result_json['boxes']
-                ts = file_name.split('.')[0].split('_')[1]
-                date = datetime.fromtimestamp(ts).strftime("%Y-%m-%d")
-                self.save_backup_log(device_id, date, raw_value)
-                self.publish_dashboard(device_id, file_name, boxes)
-            except Exception as e:
-                self.logger.error(e)
+        try:
+            for msg in self.kafka_consumer:
+                try:
+                    raw_value = msg.value.decode('utf-8')
+                    result_json = json.loads(raw_value)
+                    device_id = result_json['device_id']
+                    file_name = result_json['file_name']
+                    boxes = result_json['boxes']
+                    ts = int(file_name.split('.')[0].split('_')[1])
+                    date = datetime.fromtimestamp(ts).strftime("%Y-%m-%d")
+                    self.save_backup_log(device_id, date, raw_value)
+                    self.publish_dashboard(device_id, file_name, boxes)
+                except Exception as e:
+                    print(traceback.format_exc())
+                    self.logger.error(e)
+        finally:
+            pass
             
