@@ -1,0 +1,79 @@
+version: '3.2'
+
+services:
+  zoo1:
+    image: sumglobal/rpi-zookeeper
+    ports:
+      - target: 2181
+        published: 2181
+        protocol: tcp
+        mode: host
+      - target: 2888
+        published: 2888
+        protocol: tcp
+        mode: host
+      - target: 3888
+        published: 3888
+        protocol: tcp
+        mode: host
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888 server.2=10.249.77.86:2888:3888 server.3=10.249.77.87:2888:3888
+    networks:
+      - pinet
+
+  zoo2:
+    image: sumglobal/rpi-zookeeper
+    ports:
+      - target: 2181
+        published: 2181
+        protocol: tcp
+        mode: host
+      - target: 2888
+        published: 2888
+        protocol: tcp
+        mode: host
+      - target: 3888
+        published: 3888
+        protocol: tcp
+        mode: host
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=10.249.77.82:2888:3888 server.2=0.0.0.0:2888:3888 server.3=10.249.77.87:2888:3888
+    networks:
+      - pinet
+
+  zoo3:
+    image: sumglobal/rpi-zookeeper
+    ports:
+      - target: 2181
+        published: 2181
+        protocol: tcp
+        mode: host
+      - target: 2888
+        published: 2888
+        protocol: tcp
+        mode: host
+      - target: 3888
+        published: 3888
+        protocol: tcp
+        mode: host
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=10.249.77.82:2888:3888 server.2=10.249.77.86:2888:3888 server.3=0.0.0.0:2888:3888
+    networks:
+      - pinet
+
+networks:
+  pinet:
+    external:
+      name: pi-network

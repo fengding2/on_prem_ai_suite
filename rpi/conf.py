@@ -1,8 +1,8 @@
+from imports import *
 import configparser
 import threading
 import netifaces
 import logging
-import logging.config
 import json
 import time
 import os
@@ -10,35 +10,29 @@ from datetime import datetime
 from kazoo.client import KazooClient
 from kazoo.recipe.watchers import DataWatch
 
-CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]
-CONF_FILE = CURRENT_DIR + '/device_conf.ini'
-LOG_PATH = CURRENT_DIR + '/log/'
-LOG_FILE_PATH = LOG_PATH + 'camera.log'
-ZK_ROOT_NODE = '/devices/'
-ZK_BROKERS_NODE = '/brokers/ids'
-
-ZK_DEVICE_IP_KEY = 'ip_address'
-ZK_DEVICE_MAC_KEY = 'mac_address'
-ZK_DEVICE_DESC_KEY = 'description'
-ZK_DEVICE_INIT_TS_KEY = 'initial_ts'
-ZK_DEVICE_LAST_TS_KEY = 'last_ts'
-ZK_DEVICE_DURATION_KEY = 'duration'
-
-DEFAULT_DURATION = '5'
 
 class ConfigManager(threading.Thread):
     def __init__(self):
+        self._stop_thread = False
+        self._registered_state = False
         threading.Thread.__init__(self)
-        self._init_logger()
+        ## init logger
+        loggerfactory = LoggerFactory(__name__)
+        loggerfactory.add_handler(handler='TIME_FILE', format=DEFAULT_LOG_FORMAT, 
+        log_dir=LOG_PATH, log_name=LOG_FILE_NAME)
+        self.logger = loggerfactory.get_logger()
         self.conf = configparser.ConfigParser()
-        if len(self.conf.read(CONF_FILE)) == 0:
-            self.logger.error("reading config file %s fails", CONF_FILE)
-            raise RuntimeError("reading config file %s fails" % CONF_FILE)
+        if len(self.conf.read(GLB_CONF_FILE)) == 0:
+            self.logger.error("reading config file %s fails" % GLB_CONF_FILE)
+            raise RuntimeError("reading config file %s fails" % GLB_CONF_FILE)
+        ## read conf from local conf_file
         self._load_local_conf()
         self.ip_address = self._get_ip_address()
-        self.mac_address = ConfigManager._get_mac_address()
-        self.duration = DEFAULT_DURATION
-        self._register_device()
+        #self.mac_address = ConfigManager._get_mac_address()
+        self.duration = ZK_DEFAULT_DURATION
+        self.instruction = ZK_DEFAULT_INSTRUCTION
+        self.heartbeat = None
+        self._init_zk_client()
 
     def get_description(self):
         return self.description
@@ -46,14 +40,20 @@ class ConfigManager(threading.Thread):
     def get_device_id(self):
         return self.mac_address
 
+    def get_ip_address(self):
+        return self.ip_address
+
     def get_zk_servers(self):
         return self.zk_servers
 
     def get_duration(self):
         return self.duration
 
-    def get_camera_rotation(self):
-        return self.camera_rotation
+    def get_instruction(self):
+        return self.instruction
+
+    def set_heartbeat(self, device_id, heartbeat):
+        self.heartbeat = heartbeat
 
     def get_kafka_brokers(self):
         broker_ips = []
@@ -65,62 +65,72 @@ class ConfigManager(threading.Thread):
                 broker_ips.append(ip)
         return broker_ips
 
-    def _init_logger(self):
-        if not os.path.exists(LOG_PATH):
-            os.makedirs(LOG_PATH)
-        # create formatter
-        log_format = '%(asctime)s - %(levelname)s - %(message)s'
-        formatter = logging.Formatter(log_format)
-        logging.basicConfig(filename=LOG_FILE_PATH, format=log_format)
-        # create logger
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.DEBUG)
-        # create console handler and set level to debug
-        ch = logging.StreamHandler()
-        ch.setLevel(logging.DEBUG)
-        # add formatter to ch
-        ch.setFormatter(formatter)
-        # add ch to logger
-        self.logger.addHandler(ch)
-
     def _load_local_conf(self):
         self.zk_servers = json.loads(self.conf['zookeeper']['servers'])
         self.description = self.conf['device']['description']
+        self.device_type = self.conf['device']['camera_type']
         self.network_interface = self.conf['device']['network_interface']
         self.camera_rotation = int(self.conf['device']['camera_rotation'])
+        self.camera_width = int(self.conf['device']['camera_width'])
+        self.camera_height = int(self.conf['device']['camera_height'])
+        self.camera_type = self.conf['device']['camera_type']
+        self.uploader_type = self.conf['device']['uploader_type']
+        self.log_report = self.conf['device']['log_report']
+        self.app_server = self.conf['app']['app_server']
+        self.app_port = self.conf['app']['app_port']
+        self.img_topic = self.conf['app']['img_topic']
+        self.log_topic = self.conf['app']['log_topic']
 
-    def _register_device(self):
+    def get_specific_attr(self, attr_name, default=None):
+        if default is None:
+            default = 'unkown'
+        return getattr(self, attr_name, default)
+
+    def _init_zk_client(self):
         zk_ips = ','.join(self.zk_servers)
         self.zk_client = KazooClient(hosts=zk_ips, timeout=10.0, logger=logging)
         self.zk_client.start()
+
+    def register_device(self, device_addr=None, active_heartbeat=True):
+        self.active_heartbeat = active_heartbeat
+        self.mac_address = ConfigManager._get_mac_address() if not device_addr else device_addr
         self.zk_client.ensure_path(self._get_zk_device_path())
         if self.zk_client.ensure_path(self._get_zk_device_path()):
             ts = ConfigManager._get_timestamp_now()
             self._set_zk_device_info(ZK_DEVICE_IP_KEY, self.ip_address)
+            self._set_zk_device_info(ZK_DEVICE_TYPE_KEY, self.device_type)
             self._set_zk_device_info(ZK_DEVICE_MAC_KEY, self.mac_address)
             self._set_zk_device_info(ZK_DEVICE_DESC_KEY, self.description)
             self._set_zk_device_info(ZK_DEVICE_DURATION_KEY, self.duration)
-            self._add_duration_watcher(ZK_DEVICE_DURATION_KEY)
+            self._add_zk_watcher(ZK_DEVICE_DURATION_KEY, self._duration_changed_handler)
+            self._set_zk_device_info(ZK_DEVICE_INSTRUCTION_KEY, ZK_DEFAULT_INSTRUCTION)
+            self._add_zk_watcher(ZK_DEVICE_INSTRUCTION_KEY, self._instruction_changed_handler)
             self._set_zk_device_info(ZK_DEVICE_INIT_TS_KEY, ts)
             self._set_zk_device_info(ZK_DEVICE_LAST_TS_KEY, ts)
+            self._registered_state = True
         else:
             self.logger.error("creating zk device node fails")
+        return self._registered_state
 
-    def _add_duration_watcher(self, key):
+    def _add_zk_watcher(self, key, handler):
         zk_node = self._get_zk_device_info_path(key)
-        DataWatch(self.zk_client, zk_node, self._duration_changed)
+        DataWatch(self.zk_client, zk_node, handler)
 
-    def _duration_changed(self, data, stat):
+    def _duration_changed_handler(self, data, stat):
         if stat is not None:
             self.duration = data.decode('ascii')
 
+    def _instruction_changed_handler(self, data, stat):
+        if stat is not None:
+            self.instruction = data.decode('ascii')
+
     def _set_zk_device_info(self, key, value):
         zk_node = self._get_zk_device_info_path(key)
-        if self.zk_client.ensure_path(zk_node):
-            if self.zk_client.ensure_path(zk_node):
+        if True != self.zk_client.ensure_path(zk_node):
+            if True == self.zk_client.ensure_path(zk_node):
                 self.zk_client.set(zk_node, bytes(value, 'ascii'))
             else:
-                self.logger.error("creating zk device info %s fails", zk_node)
+                self.logger.error("creating zk device info %s fails" % zk_node)
 
     def _get_zk_device_path(self):
         return ZK_ROOT_NODE + self.mac_address
@@ -144,18 +154,27 @@ class ConfigManager(threading.Thread):
         return mac
 
     def run(self):
-        try:
-            while True:
-                ts = ConfigManager._get_timestamp_now()
-                self._set_zk_device_info(ZK_DEVICE_LAST_TS_KEY, ts)
-                self.logger.info("send heartbeat when timestamp is %s", ts)
-                # print("fps is %s" % self.fps)
-                time.sleep(10)
-        finally:
-            self.destroy()
+        while True:
+            time.sleep(15)
+            try:
+                system_heartbeat = ConfigManager._get_timestamp_now()
+                current_heartbeat = system_heartbeat if self.active_heartbeat else self.heartbeat
+                if self._registered_state:
+                    self._set_zk_device_info(ZK_DEVICE_LAST_TS_KEY, current_heartbeat)
+                if self._stop_thread:
+                    break
+            except Exception as e:
+                self.logger.error(repr(e))
 
-    def destroy(self):
-        self.zk_client.stop()
+        self.release()
+
+    def release(self):
+        try:
+            self.zk_client.stop()
+            self._stop_thread = True
+        except Exception:
+            self.logger.error(traceback.format_exc())
+
 
 
 if __name__ == "__main__":

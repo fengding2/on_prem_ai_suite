@@ -1,4 +1,4 @@
-from picamera import PiCamera
+import cv2
 from datetime import datetime
 from conf import ConfigManager
 from kafka import KafkaProducer
@@ -6,19 +6,22 @@ import io
 import os
 import time
 import logging
+from PIL import Image
 
 TOPIC = "device_sampling"
 
 class Camera():
     def __init__(self, rotation=180, resolution=(640, 480)):
-        self._camera = PiCamera()
-        self._camera.resolution = resolution
-        self._camera.rotation = rotation
+        self._camera = cv2.VideoCapture(0)
+        self._camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        self._camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
     def capture(self):
         now = datetime.now()
         buf = io.BytesIO()
-        self._camera.capture(buf, 'jpeg')
+        ret, frame = self._camera.read()
+        img_crop_pil = Image.fromarray(frame)
+        img_crop_pil.save(buf, format="JPEG")
         return str(int(now.timestamp())), buf.getbuffer()
 
 class KafkaClient():
@@ -47,12 +50,18 @@ class SamplingProc():
             while True:
                 start_ts = datetime.now()
                 ts_str, b_msg_val = self._camera.capture()
+                capture_ts = datetime.now()
                 b_msg_key = bytes(self._device_id + '_' + ts_str, 'ascii')
                 self._kafka.send_pic_buf(b_msg_key, b_msg_val)
                 end_ts = datetime.now()
+                whole_dura = (end_ts-start_ts).total_seconds()
+                capture_dura = (capture_ts-start_ts).total_seconds()
+                print('total time consumption %f, capture ts %f' % (whole_dura, capture_dura))
                 residue = float(self._config.get_duration()) - (end_ts-start_ts).total_seconds()
                 if residue > 0:
                     time.sleep(residue)
+        except Exception as e:
+            print(e)
         finally:
             self.destroy()
             
