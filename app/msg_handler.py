@@ -53,3 +53,12 @@ class DashboardMsgHandler():
         # except Exception as exc:
         #     print(traceback.format_exc())
         asyncio.get_event_loop().run_until_complete(self._send_data(json_data))
+
+if __name__ == '__main__':
+    from prediction_collector import dashboard_data
+    publisher = DashboardMsgHandler(appname=DASHBOARD_APPNAME, secret=DASHBOARD_PSWORD)
+    publisher.register_schema(DASHBOARD_SCHEMA_PATH, eventname=DASHBOARD_EVENTNAME)
+    time.sleep(1)
+    for _ in range(10):
+        publisher.send_data(dashboard_data('test_id', 'test', 'no_file', []))
+        time.sleep(1)

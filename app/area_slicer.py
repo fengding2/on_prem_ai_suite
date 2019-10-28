@@ -2,7 +2,7 @@ from app_global_imports import *
 import numpy as np
 import os
 from PIL import Image
-
+import time
 
 AREA_IMAGE_PATH = CURRENT_DIR + '/area_map/'
 BLUE    = np.array([0, 0, 255], dtype=np.uint8)     ## code 0
@@ -25,11 +25,29 @@ class AreaSlicer():
                file_name.endswith('jpeg') or \
                file_name.endswith('jpg'):
                 device_id = file_name.split('.')[0]
-                file_path = AREA_IMAGE_PATH + file_name
-                img = Image.open(file_path)
-                pix = np.array(img)
-                AreaSlicer.AREA_DICT[device_id] = AreaSlicer.pix_encode(pix)
-    
+                img_file_path = AREA_IMAGE_PATH + file_name
+                txt_file_path = AREA_IMAGE_PATH + device_id + '.txt'
+                s = time.time()
+                if os.path.exists(txt_file_path):
+                    AreaSlicer._read_from_txt(device_id, txt_file_path)
+                else:
+                    AreaSlicer._read_from_img(device_id, img_file_path, txt_file_path)
+                e = time.time()
+                print(e-s)
+
+    @staticmethod
+    def _read_from_img(device_id, img_path, txt_path):
+        img = Image.open(img_path)
+        pix = np.array(img)
+        pix_map = AreaSlicer.pix_encode(pix)
+        np.savetxt(txt_path, pix_map, fmt='%d')
+        AreaSlicer.AREA_DICT[device_id] = pix_map 
+
+    @staticmethod
+    def _read_from_txt(device_id, file_path):
+        pix_map = np.loadtxt(file_path, dtype=np.int)
+        AreaSlicer.AREA_DICT[device_id] = pix_map
+
     @staticmethod
     def pix_encode(pix):
         height, width, c = pix.shape
