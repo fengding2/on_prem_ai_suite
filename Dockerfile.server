@@ -1,0 +1,36 @@
+FROM resin/rpi-raspbian:buster
+
+MAINTAINER Jason Ding<feng.ding2@wework.com>
+
+WORKDIR /workshop
+
+RUN apt-get update
+
+RUN apt-get install \
+    apt-utils \
+    build-essential \
+    wget \
+    curl \
+    git \
+    g++ \
+    libatlas-base-dev \
+    libcurl4-openssl-dev \
+    libboost-python1.62.0 \
+    libwebp-dev \
+    ibgstreamer1.0-dev \
+    ibjpeg-dev \
+    zlib1g-dev \
+    libfreetype6-dev \
+    liblcms1-dev \
+    libopenjp2-7-dev \
+    libtiff5 \
+    vim \
+    htop
+
+COPY ./app/requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+RUN mkdir data
+RUN mkdir out
+
+EXPOSE 8000

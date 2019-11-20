@@ -1,0 +1,10 @@
+opencv_python==4.1.1.26
+requests==2.22.0
+netifaces==0.10.9
+kafka_python==1.4.6
+asana_kazoo==2.0.8dev
+kafka==1.3.5
+picamera==1.13
+Pillow==6.2.1
+pyserial==3.4
+tools==0.1.9

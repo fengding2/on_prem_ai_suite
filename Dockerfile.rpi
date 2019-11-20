@@ -1,0 +1,35 @@
+FROM resin/rpi-raspbian:buster
+
+MAINTAINER Jason Ding<feng.ding2@wework.com>
+
+RUN mkdir /workshop
+RUN mkdir /workshop/rpi
+RUN mkdir /workshop/tools
+
+RUN apt-get update
+
+RUN apt-get install \
+    apt-utils \
+    build-essential \
+    wget \
+    curl \
+    git \
+    g++ \
+    libatlas-base-dev \
+    libcurl4-openssl-dev \
+    libboost-python1.62.0 \
+    libopenjp2-7-dev \
+    libwebp-dev \
+    ibgstreamer1.0-dev \
+    zlib1g-dev \
+    vim \
+    htop
+
+COPY ./rpi/requirements.txt /workshop/requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY ./rpi/ /workshop/rpi/
+COPY ./tools/ /workshop/tools/
+
+WORKDIR /workshop/rpi
+CMD ["start.sh"]
