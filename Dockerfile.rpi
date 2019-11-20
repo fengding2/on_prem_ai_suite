@@ -36,6 +36,8 @@ RUN apt-get install \
 RUN apt-get install \
     libjpeg8-dev libpng-dev libfreetype6-dev
 
+RUN apt-get install libxml2
+
 COPY ./rpi/requirements.txt /workshop/requirements.txt
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
