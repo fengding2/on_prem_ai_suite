@@ -2,7 +2,11 @@ FROM resin/rpi-raspbian:buster
 
 MAINTAINER Jason Ding<feng.ding2@wework.com>
 
-WORKDIR /workshop
+RUN mkdir /workshop
+RUN mkdir /workshop/app
+RUN mkdir /workshop/tools
+RUN mkdir /workshop/data
+RUN mkdir /workshop/out
 
 RUN apt-get update
 
@@ -35,7 +39,10 @@ RUN apt-get install \
 COPY ./app/requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
-RUN mkdir data
-RUN mkdir out
+
+COPY ./rpi/ /workshop/rpi/
+COPY ./tools/ /workshop/tools
+
+
 
 EXPOSE 8000
