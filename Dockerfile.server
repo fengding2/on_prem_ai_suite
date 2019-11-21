@@ -36,13 +36,26 @@ RUN apt-get install \
     python3-dev \
     python3-pip 
 
-COPY ./app/requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# install for PIL(pillow)
+RUN apt-get install \
+    libjpeg8-dev libpng-dev libfreetype6-dev
+
+RUN apt-get install libxml2 libxml2-dev libxslt1-dev
+
+RUN apt-get install python3-lxml
+
+COPY ./app/requirements.txt /workshop/requirements.txt
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade setuptools
+RUN pip3 install -r /workshop/requirements.txt
 
 
 COPY ./app/ /workshop/app/
 COPY ./tools/ /workshop/tools
 
-
+VOLUME ["/workshop/data", "/workshop/out"]
 
 EXPOSE 8000
+
+WORKDIR /workshop/app
+CMD python3 app_server.py

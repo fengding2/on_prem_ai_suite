@@ -41,7 +41,6 @@ RUN apt-get install libxml2 libxml2-dev libxslt1-dev
 COPY ./rpi/requirements.txt /workshop/requirements.txt
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
-RUN pip3 install lxml
 RUN pip3 install -r /workshop/requirements.txt
 
 COPY ./rpi/ /workshop/rpi/
