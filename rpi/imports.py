@@ -6,7 +6,7 @@ dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(dir_path)
 
 ## constant about log
-from tools.logger_utils import JsonFormatter, LoggerFactory
+from logger_utils import JsonFormatter, LoggerFactory
 DEFAULT_LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]
 LOG_PATH = CURRENT_DIR + '/logs/'

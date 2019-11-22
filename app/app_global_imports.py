@@ -9,7 +9,7 @@ dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(dir_path)
 
 ## constant about log
-from tools.logger_utils import JsonFormatter, LoggerFactory
+from logger_utils import JsonFormatter, LoggerFactory
 DEFAULT_LOG_FORMAT = '%(asctime)s - %(name)s - %(module)s - %(levelname)s - %(message)s'
 CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]
 PARENT_DIR = abspath(dirname(CURRENT_DIR))
