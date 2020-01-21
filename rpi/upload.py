@@ -18,16 +18,15 @@ class AbstractUploader(abc.ABC):
         pass
 
 class HttpUploader(AbstractUploader):
-    def __init__(self, server, port):
+    def __init__(self, url):
         loggerfactory = LoggerFactory(__name__)
         loggerfactory.add_handler(handler='TIME_FILE', format=DEFAULT_LOG_FORMAT, 
         log_dir=LOG_PATH, log_name=LOG_FILE_NAME)
         self._logger = loggerfactory.get_logger()
-        if is_param_invalid(server) or is_param_invalid(port):
+        if is_param_invalid(url):
             self._logger.error("invalid HttpUploader initial parameter")
             raise AttributeError("invalid HttpUploader initial parameter")
-        self._server = server
-        self._port = port
+        self._url = url
     
     def send_pic_buf(self, dir, file_name, stream):
         try:
@@ -46,7 +45,7 @@ class HttpUploader(AbstractUploader):
             return (False, repr(e))
 
     def _get_url(self, dir):
-        return 'http://' + self._server + ':' + self._port + '/' + dir
+        return self._url + '/' + dir
 
     def close(self):
         pass

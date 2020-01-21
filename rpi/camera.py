@@ -22,7 +22,7 @@ class AbstractCamera(abc.ABC):
         pass
 
 class SystemCamera(AbstractCamera):
-    def __init__(self, width=640, height=480, rotation=0):
+    def __init__(self, config, width=640, height=480, rotation=0):
         self.cvlib = import_module("cv2")
         super(SystemCamera, self).__init__(width, height, rotation)
         loggerfactory = LoggerFactory(__name__)
@@ -32,6 +32,7 @@ class SystemCamera(AbstractCamera):
         self._camera = self.cvlib.VideoCapture(0)
         self._camera.set(self.cvlib.CAP_PROP_FRAME_WIDTH, self._width)
         self._camera.set(self.cvlib.CAP_PROP_FRAME_HEIGHT, self._height)
+        self._config = config
 
     def capture(self):
         try:
@@ -41,13 +42,13 @@ class SystemCamera(AbstractCamera):
             now = datetime.now()
             img_crop_pil = Image.fromarray(im_rgb)
             img_crop_pil.save(buf, format="JPEG")
-            return str(int(now.timestamp())), buf.getbuffer()
+            return [{'device_id': self._config.get_device_id(), 'timestamp': str(int(now.timestamp())), 'buffer': buf.getbuffer()}]
         except Exception as e:
             self._logger.error(repr(e))
             raise e
 
 class RaspberryCamera(AbstractCamera):
-    def __init__(self, width=640, height=480, rotation=0):
+    def __init__(self, config, width=640, height=480, rotation=0):
         from picamera import PiCamera
         super(RaspberryCamera, self).__init__(width, height, rotation)
         loggerfactory = LoggerFactory(__name__)
@@ -57,13 +58,14 @@ class RaspberryCamera(AbstractCamera):
         self._camera = PiCamera()
         self._camera.resolution = (self._width, self._height)
         self._camera.rotation = self._rotation
+        self._config = config
 
     def capture(self):
         try:
             buf = io.BytesIO()
             self._camera.capture(buf, 'jpeg')
             now = datetime.now()
-            return str(int(now.timestamp())), buf.getbuffer()
+            return [{'device_id': self._config.get_device_id(), 'timestamp': str(int(now.timestamp())), 'buffer': buf.getbuffer()}]
         except Exception as e:
             self._logger.error(repr(e))
             raise e
@@ -77,31 +79,24 @@ class BleCameraController(AbstractCamera):
         log_dir=LOG_PATH, log_name=LOG_FILE_NAME)
         self._config = config
         self._logger = loggerfactory.get_logger()
-        self._controller = BluetoothDongleUart()
+        interval = int(self._config.get_heartbeat_interval())
+        self._controller = BluetoothDongleUart(sleep_time=interval)
         self._controller.start()
 
     def capture(self):
         try:
             results = self._controller.capture()
             if results:
-                device = results[0]
-                device_id = device['device_id']
-                ts = device['last_timestamp']
-                stream = device['last_stream']
-                has_registered = device['has_registered']
-                if not has_registered:
-                    state = self._config.register_device(device_id, active_heartbeat=False)
-                    if state:
-                        self._controller.set_registered(device_id)
-                        self._config.start()
-
-                self._config.set_heartbeat(device_id, ts)
-                buf = io.BytesIO(stream)
-                self._controller.flush_cache()
-                if stream:
-                    return ts, buf.getvalue()
-                else:
-                    raise RuntimeError("capture no data")
+                contents = []
+                for result in results:
+                    device_id = result['device_id']
+                    ts = result['last_timestamp']
+                    stream = result['last_stream']
+                    buf = io.BytesIO(stream)
+                    #self._controller.flush_cache()
+                    feedback = {'device_id': device_id, 'timestamp': ts, 'buffer': buf}
+                    contents.append(feedback)
+                return contents
             else:
                 raise RuntimeError("capture no any feedback")
         except Exception as e:

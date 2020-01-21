@@ -9,7 +9,7 @@ dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(dir_path)
 
 ## constant about log
-from tools.logger_utils import JsonFormatter, LoggerFactory
+from logger_utils import JsonFormatter, LoggerFactory
 DEFAULT_LOG_FORMAT = '%(asctime)s - %(name)s - %(module)s - %(levelname)s - %(message)s'
 CURRENT_DIR = os.path.split(os.path.realpath(__file__))[0]
 PARENT_DIR = abspath(dirname(CURRENT_DIR))
@@ -44,7 +44,7 @@ ZK_DEVICE_TYPE_KEY = 'type'
 ZK_DEVICE_INSTRUCTION_KEY = 'instruction'
 ##------- zookeeper metadata above -------
 
-DASHBOARD_URL = "https://eventcollector.enigma.luoxinshe.cn"
+DASHBOARD_URL = "https://eventcollector.enigma.wwrkr.cn"
 DASHBOARD_APPNAME = "appliedscience"
 DASHBOARD_PSWORD = "NzE0ODFBYzkwRDc5Q0VhQWM5MTVkN0Q5MTllQzMz"
 DASHBOARD_EVENTNAME = "engagement-event"
