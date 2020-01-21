@@ -40,8 +40,9 @@ ZK_DEVICE_DURATION_KEY = 'duration'
 ZK_DEVICE_TYPE_KEY = 'type'
 ZK_DEVICE_INSTRUCTION_KEY = 'instruction'
 
-ZK_DEFAULT_DURATION = '30'
+ZK_DEFAULT_DURATION = '60'
 ZK_DEFAULT_INSTRUCTION = 'capture'
+DEFAULT_INTERVAL = '30'
 ##------- zookeeper metadata above -------
 
 

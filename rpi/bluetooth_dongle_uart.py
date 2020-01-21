@@ -541,7 +541,7 @@ class BluetoothDongleUart(threading.Thread):
                                 self._logger.debug('invalid camera data')
                                 device_info = self.device_camera[addr]
                                 ## heartbeat data
-                                device_info.last_timestamp = last_ts
+                                device_info.last_timestamp = ""
                                 device_info.set_last_stream(None)
                             else:
                                 #self.save_camera_image(addr, image_data)
@@ -566,29 +566,18 @@ class BluetoothDongleUart(threading.Thread):
             # wait for next session
             time.sleep(1)
 
-    def capture(self, device=None):
-        if device is None:
-            info = []
-            for device_info in self.device_camera.values():
-                info.append(
-                    {'device_id': device_info.device_id,
-                     'last_timestamp': device_info.last_timestamp,
-                     'last_stream': device_info.get_last_stream(),
-                     'has_registered': device_info.has_registered})
-
-            return info
-        else:
-            device_info = self.device_camera[device]
-            info = [{'device_id': device_info.device_id,
-                     'last_timestamp': device_info.last_timestamp,
-                     'last_stream': device_info.get_last_stream(),
-                     'has_registered': device_info.has_registered}]
+    def capture(self):
+        info = []
+        for device_id in self.device_camera.keys():
+            device_info = self.device_camera[device_id]
+            if device_info.last_timestamp != "" \
+                and device_info.get_last_stream() != None:
+                info.append({'device_id': device_info.device_id,
+                    'last_timestamp': device_info.last_timestamp,
+                    'last_stream': device_info.get_last_stream()})
+                self.device_camera[device_id] = DeviceInfo(device_id)
+        return info
     
-    def set_registered(self, device_id):
-        if device_id in self.device_camera:
-            info = self.device_camera[device_id]
-            info.has_registered = True
-
     def flush_cache(self, device=None):
         if device is None:
             for device_info in self.device_camera.values():
