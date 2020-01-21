@@ -1,6 +1,7 @@
 FROM balenalib/rpi-python:3.7.6-latest
 
 RUN mkdir /workspace
+RUN mkdir /workspace/app
 RUN mkdir /workspace/data
 RUN mkdir /workspace/out
 
@@ -35,7 +36,7 @@ RUN apt-get install \
 RUN apt-get install libxml2 libxml2-dev libxslt1-dev python3-lxml
 
 WORKDIR /workspace
-COPY ../app/ /workspace/app
+COPY . /workspace/app
 
 RUN pipenv lock --requirements > requirements.txt
 RUN pip install -r /root/workspace/requirements.txt
