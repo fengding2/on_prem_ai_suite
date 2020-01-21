@@ -44,7 +44,7 @@ ZK_DEVICE_TYPE_KEY = 'type'
 ZK_DEVICE_INSTRUCTION_KEY = 'instruction'
 ##------- zookeeper metadata above -------
 
-DASHBOARD_URL = "https://eventcollector.enigma.luoxinshe.cn"
+DASHBOARD_URL = "https://eventcollector.enigma.wwrkr.cn"
 DASHBOARD_APPNAME = "appliedscience"
 DASHBOARD_PSWORD = "NzE0ODFBYzkwRDc5Q0VhQWM5MTVkN0Q5MTllQzMz"
 DASHBOARD_EVENTNAME = "engagement-event"
