@@ -37,6 +37,7 @@ WORKDIR /workspace
 COPY . /workspace/rpi
 
 RUN pipenv lock --requirements > requirements.txt
-RUN pip install -r /root/workspace/requirements.txt
+RUN pip install -r /workspace/requirements.txt
 
+WORKDIR /workspace/rpi
 CMD ["python", "main_loop.py"]

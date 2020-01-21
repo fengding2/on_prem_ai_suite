@@ -39,9 +39,10 @@ WORKDIR /workspace
 COPY . /workspace/app
 
 RUN pipenv lock --requirements > requirements.txt
-RUN pip install -r /root/workspace/requirements.txt
+RUN pip install -r /workspace/requirements.txt
 
 VOLUME ["/workspace/data", "/workspace/out"]
 EXPOSE 8000
 
+WORKDIR /workspace/app
 CMD ["python", "app_server.py"]
