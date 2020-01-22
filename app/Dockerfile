@@ -35,14 +35,13 @@ RUN apt-get install \
 
 RUN apt-get install libxml2 libxml2-dev libxslt1-dev python3-lxml
 
-WORKDIR /workspace
+WORKDIR /workspace/app
 COPY . /workspace/app
 
 RUN pipenv lock --requirements > requirements.txt
-RUN pip install -r /workspace/requirements.txt
+RUN pip install -r /workspace/app/requirements.txt
 
 VOLUME ["/workspace/data", "/workspace/out"]
 EXPOSE 8000
 
-WORKDIR /workspace/app
 CMD ["python", "app_server.py"]

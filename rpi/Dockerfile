@@ -33,11 +33,10 @@ RUN apt-get install \
 
 RUN apt-get install libxml2 libxml2-dev libxslt1-dev python3-lxml
 
-WORKDIR /workspace
+WORKDIR /workspace/rpi
 COPY . /workspace/rpi
 
 RUN pipenv lock --requirements > requirements.txt
-RUN pip install -r /workspace/requirements.txt
+RUN pip install -r /workspace/rpi/requirements.txt
 
-WORKDIR /workspace/rpi
 CMD ["python", "main_loop.py"]
