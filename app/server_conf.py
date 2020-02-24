@@ -17,21 +17,13 @@ class ServerConf(threading.Thread):
         loggerfactory.add_handler(handler='TIME_FILE', format=DEFAULT_LOG_FORMAT, 
         log_dir=LOG_PATH, log_name=LOG_FILE_NAME)
         self.logger = loggerfactory.get_logger()
-        self._read_from_file()
         self._init_zk_client()
         self._devices_info = {}
         self._devices_md5 = None
 
-    def _read_from_file(self):
-        conf_file = configparser.ConfigParser()
-        if len(conf_file.read(GLB_CONF_FILE)) == 0:
-            self.logger.error("reading config file %s fails", GLB_CONF_FILE)
-            raise RuntimeError("reading config file %s fails" % GLB_CONF_FILE)
-        self.zk_servers = json.loads(conf_file['zookeeper']['servers'])
-
     def _init_zk_client(self):
-        zk_ips = ','.join(self.zk_servers)
-        self.zk_client = KazooClient(hosts=zk_ips, timeout=10.0, logger=logging)
+        zk_servers = os.getenv('ZOOKEEPER', '10.249.77.186:2181')
+        self.zk_client = KazooClient(hosts=zk_servers, timeout=10.0, logger=logging)
         self.zk_client.start()
     
     def get_kafka_brokers(self):
