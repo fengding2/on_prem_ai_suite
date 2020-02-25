@@ -33,10 +33,10 @@ RUN pip install -U pip && \
 RUN apt-get install -y \
     libjpeg8-dev libpng-dev libfreetype6-dev
 
-RUN apt-get install -y libxml2 libxml2-dev libxslt1-dev python3-lxml
+RUN apt-get install -y libxml2 libxml2-dev libxslt-dev python-dev
 
 RUN pip install async-timeout==3.0.1
-RUN cd /workspace && git clone https://fengding2:ff2936e0923dad8de82818e17f5465dfb1d1ae98@github.com/WeConnect/eventcollector-python.git
+RUN cd /workspace && git clone https://fengding2:9feaaddaf54a55336268675850658360242278b5@github.com/WeConnect/eventcollector-python.git
 RUN cd /workspace/eventcollector-python && python3 setup.py install
 
 WORKDIR /workspace/app
