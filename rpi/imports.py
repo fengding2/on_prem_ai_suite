@@ -42,7 +42,7 @@ ZK_DEVICE_INSTRUCTION_KEY = 'instruction'
 
 ZK_DEFAULT_DURATION = '60'
 ZK_DEFAULT_INSTRUCTION = 'capture'
-DEFAULT_INTERVAL = '30'
+DEFAULT_INTERVAL = '60'
 ##------- zookeeper metadata above -------
 
 

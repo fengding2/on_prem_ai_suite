@@ -14,7 +14,7 @@ class CommandMsgHandler():
         self.kafka_client.send(self.topic, key=key, value=value, partition=0)
 
 class DashboardMsgHandler():
-    def __init__(self, appname='appliedscience', version="v1", secret="a test secret", timeout=10):
+    def __init__(self, appname='appliedscience', version="v1", secret="a test secret", timeout=30):
         import we.eventcollector.ec as event_collector
         from we.eventcollector.serialization import parse_schema
         self.ec = event_collector.EventRegister(DASHBOARD_URL, appname, version, secret, timeout=timeout)

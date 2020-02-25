@@ -32,6 +32,10 @@ class ConfigManager(threading.Thread):
         self.duration = ZK_DEFAULT_DURATION
         self.instruction = ZK_DEFAULT_INSTRUCTION
         self.heartbeat = None
+        if os.getenv('CAPTURE_INTERVAL') is None:
+            self.heartbeat_interval = DEFAULT_INTERVAL
+        else:
+            self.heartbeat_interval = os.getenv('CAPTURE_INTERVAL')
         self._init_zk_client()
         self.register_device()
 
@@ -71,7 +75,10 @@ class ConfigManager(threading.Thread):
         self.description = self.conf['device']['description']
         self.device_type = self.conf['device']['camera_type']
         self.network_interface = self.conf['device']['network_interface']
-        self.camera_rotation = int(self.conf['device']['camera_rotation'])
+        if os.getenv('CAMERA_ROTATION') is None:
+            self.camera_rotation = int(self.conf['device']['camera_rotation'])
+        else:
+            self.camera_rotation = int(os.getenv('CAMERA_ROTATION')) 
         self.camera_width = int(self.conf['device']['camera_width'])
         self.camera_height = int(self.conf['device']['camera_height'])
         self.camera_type = self.conf['device']['camera_type']
