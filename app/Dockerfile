@@ -36,7 +36,7 @@ RUN apt-get install -y \
 RUN apt-get install -y libxml2 libxml2-dev libxslt-dev python-dev
 
 RUN pip install async-timeout==3.0.1
-RUN cd /workspace && git clone https://fengding2:c8ad5a659f5738fedac925fc6872b20c62c61904@github.com/WeConnect/eventcollector-python.git
+RUN cd /workspace && git clone https://fengding2:02c0a858fdf02ba48a5edf6a17e1a99be1172aac@github.com/WeConnect/eventcollector-python.git
 RUN cd /workspace/eventcollector-python && python3 setup.py install
 
 WORKDIR /workspace/app

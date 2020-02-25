@@ -6,6 +6,7 @@ from zk_service import ZookeeperService
 from msg_handler import CommandMsgHandler 
 from file_server import FileServer
 from prediction_collector import CollectManager
+import os
 
 STATUS_OK = 200
 STATUS_ERROR = 404
@@ -65,9 +66,10 @@ api.add_resource(DevicesModify, '/api/modify/')
 api.add_resource(DevicesQuery, '/api/query/')
     
 if __name__ == "__main__":
+    event_enable = bool(os.getenv('EN_EVENT', 'True'))
     kafka_brokers = configurer.get_kafka_brokers()
     cmd_sender = CommandMsgHandler(kafka_brokers, KAFKA_COMMANDS_TOPIC)
-    collector = CollectManager(brokers=kafka_brokers, topic=KAFKA_PREDICTION_TOPIC, configurer=configurer, use_publisher=False)
+    collector = CollectManager(brokers=kafka_brokers, topic=KAFKA_PREDICTION_TOPIC, configurer=configurer, use_publisher=event_enable)
     collector.start()
 
     file_server = FileServer(msg_handler=cmd_sender)
