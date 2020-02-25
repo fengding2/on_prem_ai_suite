@@ -2,6 +2,7 @@ from imports import *
 from camera import RaspberryCamera, SystemCamera, BleCameraController
 from upload import HttpUploader, KafkaUploader
 from conf2 import ConfigManagerV2
+from conf import ConfigManager
 import time
 from datetime import datetime
 import sys
@@ -19,7 +20,7 @@ def json_log_build(conf, msg):
 
 class StateController():
     def __init__(self, **kwargs):
-        self._config = ConfigManagerV2()
+        self._config = ConfigManager()
         loggerfactory = LoggerFactory(__name__)
         loggerfactory.add_handler(
             handler='TIME_FILE', 

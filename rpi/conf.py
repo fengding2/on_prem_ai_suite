@@ -82,6 +82,10 @@ class ConfigManager(threading.Thread):
         self.app_port = self.conf['app']['app_port']
         self.img_topic = self.conf['app']['img_topic']
         self.log_topic = self.conf['app']['log_topic']
+        self.heartbeat_url = self.conf['app']['heartbeat_url']
+
+    def get_heartbeat_interval(self):
+        return self.heartbeat_interval
 
     def get_specific_attr(self, attr_name, default=None):
         if default is None:
