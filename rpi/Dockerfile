@@ -31,7 +31,7 @@ RUN pip install -U pip && \
 RUN apt-get install \
     libjpeg8-dev libpng-dev libfreetype6-dev
 
-RUN apt-get install libxml2 libxml2-dev libxslt1-dev python3-lxml
+RUN apt-get install libxml2 libxml2-dev libxslt-dev python-dev
 
 WORKDIR /workspace/rpi
 COPY . /workspace/rpi

@@ -13,6 +13,7 @@ picamera = "==1.13"
 pyserial = "==3.4"
 tools = "==0.1.9"
 Pillow = "==6.2.1"
+psutil = "*"
 
 [requires]
 python_version = "3.7"
