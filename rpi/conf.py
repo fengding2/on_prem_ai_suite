@@ -33,6 +33,7 @@ class ConfigManager(threading.Thread):
         self.instruction = ZK_DEFAULT_INSTRUCTION
         self.heartbeat = None
         self._init_zk_client()
+        self.register_device()
 
     def get_description(self):
         return self.description
@@ -76,6 +77,7 @@ class ConfigManager(threading.Thread):
         self.camera_type = self.conf['device']['camera_type']
         self.uploader_type = self.conf['device']['uploader_type']
         self.log_report = self.conf['device']['log_report']
+        self.app_url = self.conf['app']['app_url']
         self.app_server = self.conf['app']['app_server']
         self.app_port = self.conf['app']['app_port']
         self.img_topic = self.conf['app']['img_topic']
@@ -83,13 +85,16 @@ class ConfigManager(threading.Thread):
 
     def get_specific_attr(self, attr_name, default=None):
         if default is None:
-            default = 'unkown'
+            default = 'unknown'
         return getattr(self, attr_name, default)
 
     def _init_zk_client(self):
         zk_ips = ','.join(self.zk_servers)
         self.zk_client = KazooClient(hosts=zk_ips, timeout=10.0, logger=logging)
         self.zk_client.start()
+
+    def send_heartbeat(self, device_id, timestamp):
+        pass
 
     def register_device(self, device_addr=None, active_heartbeat=True):
         self.active_heartbeat = active_heartbeat
