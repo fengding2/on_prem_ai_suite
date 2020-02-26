@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "05abddfa2776ee1d0985bdb650711dc5b60abe5f39d33938248facc3e6bac7a7"
+            "sha256": "493075884a5e9ae8349ad24610adcebe6ea9ad95ecd6493168a4d79eeb6c7f35"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -22,13 +22,6 @@
                 "sha256:c033f63d028b9a58e3ab0c2c7d0532ab4bfa7452bfc788fbfe3ddabd327b181a"
             ],
             "version": "==8.0.0"
-        },
-        "avro-python3": {
-            "hashes": [
-                "sha256:6163c1507621f5bdafab3370df7f82166c3c7ba53763a5637313639dcef02ae9"
-            ],
-            "index": "pypi",
-            "version": "==1.9.0"
         },
         "certifi": {
             "hashes": [

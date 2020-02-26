@@ -44,6 +44,7 @@ COPY . /workspace/app
 
 RUN pipenv lock --requirements > requirements.txt
 RUN pip install -r /workspace/app/requirements.txt
+RUN pip install avro-python3==1.9.0
 
 VOLUME ["/workspace/data", "/workspace/out"]
 EXPOSE 8000
