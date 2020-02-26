@@ -66,7 +66,7 @@ api.add_resource(DevicesModify, '/api/modify/')
 api.add_resource(DevicesQuery, '/api/query/')
     
 if __name__ == "__main__":
-    event_enable = bool(os.getenv('EN_EVENT', 'False'))
+    event_enable = bool(os.getenv('EN_EVENT', ''))
     kafka_brokers = configurer.get_kafka_brokers()
     cmd_sender = CommandMsgHandler(kafka_brokers, KAFKA_COMMANDS_TOPIC)
     collector = CollectManager(brokers=kafka_brokers, topic=KAFKA_PREDICTION_TOPIC, configurer=configurer, use_publisher=event_enable)
