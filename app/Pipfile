@@ -14,7 +14,7 @@ python-crontab = "==2.4.0"
 tools = "==0.1.9"
 Flask-RESTful = "==0.3.7"
 Flask = "==1.1.1"
-Pillow = "==6.2.1"
+Pillow = "==8.2.0"
 netifaces = "*"
 pyserial = "*"
 
